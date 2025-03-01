@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javier & Rocío - Nuestra Boda</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Montserrat:wght@300;400;500&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #f4ece2;
+            --secondary-color: #f9f5f1;
+            --accent-color: #d0a37c;
+            --accent-color-dark: #b68e6e;
+            --text-color: #5c5c5c;
+            --light-text: #fff;
+            --dark-text: #2c2c2c;
+            --blue-accent: #6dacc3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: "Great Vibes", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        /* Header */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/api/placeholder/1200/800') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--light-text);
+            padding: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='rgba(255,255,255,.075)' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .names-monogram {
+            position: absolute;
+            top: 50px;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Great Vibes", serif;
+            font-size: 2.5rem;
+            color: var(--light-text);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin-top: 50px;
+        }
+
+        .header-content h1 {
+            font-size: 5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+
+        .header-content h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+
+        .header-date {
+            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 1rem 2rem;
+            border-radius: 3px;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            margin-top: 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav ul li {
+            padding: 1rem 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color-dark);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent-color-dark);
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent-color-dark);
+            font-size: 2.5rem;
+            position: relative;
+            padding-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 1px;
+            background-color: var(--accent-color);
+        }
+
+        .section-title::before {
+            content: '♥';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        /* Countdown */
+        .countdown {
+            background-color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown::before, .countdown::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M15,80 C35,95 65,95 85,80 C95,65 95,35 85,20 C65,5 35,5 15,20 C5,35 5,65 15,80 Z' fill='none' stroke='rgba(208,163,124,0.15)' stroke-width='1'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+
+        .countdown::before {
+            top: -100px;
+            left: -100px;
+        }
+
+        .countdown::after {
+            bottom: -100px;
+            right: -100px;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .countdown-item {
+            margin: 1rem;
+            padding: 2rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            min-width: 140px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .countdown-number {
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: var(--accent-color-dark);
+            font-family: 'Italiana', serif;
+        }
+
+        .countdown-text {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-color);
+            margin-top: 0.5rem;
+        }
+
+        /* Info */
+        .info {
+            background-color: var(--secondary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath d='M50,10 C70,10 85,25 90,45 C95,65 85,85 65,90 C45,95 25,85 20,65 C15,45 30,25 50,10 Z' fill='none' stroke='rgba(182,142,110,0.15)' stroke-width='1'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .event-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .event-card {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: 3rem;
+            width: 100%;
+            max-width: 350px;
+            text-align: center;
+            transition: transform 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(208, 163, 124, 0.2);
+        }
+
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--accent-color), var(--accent-color-dark));
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .event-card i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .event-card h3 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-color-dark);
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+
+        .event-card p {
+            margin-bottom: 0.8rem;
+        }
+
+        .event-card strong {
+            color: var(--dark-text);
+        }
+
+        /* Map */
+        .map-container {
+            margin-top: 3rem;
+            height: 450px;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+            border: 5px solid white;
+        }
+
+        /* Gallery */
+        .gallery {
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 300px;
+            height: 300px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(208,163,124,0.2)' stroke-width='1'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+
+        .gallery-heading {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-heading p {
+            max-width: 700px;
+            margin: 1rem auto;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--text-color);
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gallery-item {
+            height: 300px;
+            overflow: hidden;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 2rem;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-icon {
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* RSVP */
+        .rsvp {
+            background-color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rsvp::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M20,20 L80,20 L80,80 L20,80 Z' fill='none' stroke='rgba(255,255,255,0.3)' stroke-width='1'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+
+        .rsvp-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            color: var(--text-color);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(208, 163, 124, 0.2);
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+            flex: 1 1 300px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 400;
+            color: var(--dark-text);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(208, 163, 124, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, var(--accent-color), var(--accent-color-dark));
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 400;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: block;
+            margin: 0 auto;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(208, 163, 124, 0.3);
+        }
+        
+        .form-message {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .success-message {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
+            border: 1px solid #4CAF50;
+        }
+        
+        .error-message {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: #F44336;
+            border: 1px solid #F44336;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--accent-color-dark);
+            color: var(--light-text);
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .footer-hearts {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 5px;
+        }
+
+        .footer-text {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+        }
+
+        .footer-copyright {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header-content h1 {
+                font-size: 3.5rem;
+            }
+            
+            .names-monogram {
+                top: 30px;
+                width: 120px;
+                height: 120px;
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .header-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .names-monogram {
+                width: 100px;
+                height: 100px;
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                padding: 0.6rem;
+            }
+
+            .countdown-item {
+                min-width: 100px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .event-details {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-content h1 {
+                font-size: 2.3rem;
+            }
+
+            .countdown-item {
+                min-width: 80px;
+                padding: 1rem;
+            }
+
+            .countdown-number {
+                font-size: 2rem;
+            }
+
+            .rsvp-form {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-overlay"></div>
+        <div class="names-monogram">J&R</div>
+        <div class="header-content">
+            <h1>Javier & Rocío</h1>
+            <h2>¡Nos casamos!</h2>
+            <div class="header-date">06 · Junio · 2026</div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#info">Información</a></li>
+            <li><a href="#countdown">Cuenta Atrás</a></li>
+            <li><a href="#gallery">Galería</a></li>
+            <li><a href="#rsvp">Confirmar Asistencia</a></li>
+        </ul>
+    </nav>
+
+    <section class="countdown" id="countdown">
+        <div class="container">
+            <h2 class="section-title">Cuenta Atrás</h2>
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-text">Días</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-text">Horas</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-text">Minutos</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-text">Segundos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+    // Función para actualizar la cuenta atrás
+    function updateCountdown() {
+    // Fecha objetivo: 6 de junio de 2026 a las 11:30 am
+    const targetDate = new Date('June 6, 2026 11:30:00').getTime();
+    
+    // Fecha actual
+    const now = new Date().getTime();
+    
+    // Diferencia de tiempo entre ahora y la fecha objetivo
+    const timeLeft = targetDate - now;
+    
+    // Cálculos de tiempo
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    
+    // Actualizar los elementos HTML
+    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    
+    // Si la cuenta atrás ha terminado
+    if (timeLeft < 0) {
+        clearInterval(countdownInterval);
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+    }
+}
+
+    // Actualizar cada segundo
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+    // Ejecutar la función inmediatamente para evitar el retraso de un segundo
+    updateCountdown();
+    
+    </script>
+
+    <section class="info" id="info">
+        <div class="container">
+            <h2 class="section-title">Nuestro Gran Día</h2>
+            <div class="event-details">
+                <div class="event-card">
+                    <i class="fas fa-church"></i>
+                    <h3>Ceremonia</h3>
+                    <p><strong>Lugar:</strong> Monasterio de Santa Faz</p>
+                    <p><strong>Dirección:</strong> Calle Mayor, 2, 03559 Santa Faz, Alicante</p>
+                    <p><strong>Fecha:</strong> 06 de Junio de 2026</p>
+                    <p><strong>Hora:</strong> 11:30</p>
+                </div>
+                <div class="event-card">
+                    <i class="fas fa-glass-cheers"></i>
+                    <h3>Celebración</h3>
+                    <p><strong>Lugar:</strong> Finca Casa Luna</p>
+                    <p><strong>Dirección:</strong> Calle del Te, 5, 03599 Alicante, Alicante</p>
+                    <p><strong>Fecha:</strong> 06 de Junio de 2026</p>
+                    <p><strong>Hora:</strong> 14:00</p>
+                </div>
+            </div>
+
+            <!-- Sección para el mapa de ubicación -->
+<section class="location" id="location">
+ <div class="container">
+        <h2 class="section-title">Ubicación de la Iglesia</h2>
+        <div class="map-container">
+            <!-- Iframe de Google Maps -->
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6254.6706588775605!2d-0.45261325041534844!3d38.38749499693723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6239fac7c9f6df%3A0x1140f9d64312308d!2sMonasterio%20de%20Santa%20Faz.%20Can%C3%B3nigas%20Regulares%20Lateranenses%20de%20San%20Agust%C3%ADn!5e0!3m2!1ses!2ses!4v1740568401202!5m2!1ses!2ses" 
+                width="100%" 
+                height="450" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+        <div class="location-info">
+            <p><strong>Dirección:</strong> Calle Mayor, 2, 03559 Santa Faz, Alicante</p>
+        </div>
+    </div>
+</section>
+
+<section class="location" id="location">
+<div class="container">
+        <h2 class="section-title">Parking Gratuito Ceremonia</h2>
+        <div class="map-container">
+            <!-- Iframe de Google Maps -->
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2446.729277305547!2d-0.44348259118023314!3d38.39100893496784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6239c85867cb25%3A0x83cad7e9ac920d4b!2sAparcamiento%20Mercado%20Santa%20Faz!5e0!3m2!1ses!2ses!4v1740573096579!5m2!1ses!2ses" 
+                width="100%" 
+                height="450" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+
+        </div>
+    </div>
+</section>
+
+<section class="location" id="location">
+    <div class="container">
+        <h2 class="section-title">Ubicación de la Celebración</h2>
+        <div class="map-container">
+            <!-- Iframe de Google Maps -->
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170.273024469798!2d-6.0077868232484815!3d37.37780577201435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd62375bfafff477%3A0x58715a53ea1f6170!2sAv.%20de%20la%20Innovaci%C3%B3n%2C%2041020%20Sevilla!5e0!3m2!1ses!2ses!4v1708977722015!5m2!1ses!2ses" 
+                width="100%" 
+                height="450" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+        <div class="location-info">
+            <p><strong>Dirección:</strong> Calle del Te, 5, 03599 Alicante, Alicante</p>
+        </div>
+    </div>
+</section>
+
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Nuestra Historia</h2>
+            <div class="gallery-heading">
+                <p>Un viaje de amor que comenzó hace años y que ahora nos lleva hasta el altar. Estos son algunos de nuestros momentos más especiales.</p>
+            </div>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/400" alt="Imagen de la pareja">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-heart gallery-icon"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/400" alt="Imagen de la pareja">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-heart gallery-icon"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/400" alt="Imagen de la pareja">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-heart gallery-icon"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/400" alt="Imagen de la pareja">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-heart gallery-icon"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/api/placeholder/400/400" alt="Imagen de la pareja">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-heart gallery-icon"></i>
+                    </div>
+                </div>
+    </section>
+
+    <!-- Modificación del formulario HTML original para usar FormSubmit -->
+<section class="rsvp" id="rsvp">
+    <div class="container">
+        <h2 class="section-title">Confirmar Asistencia</h2>
+        <div class="rsvp-form">
+            <!-- Importante: reemplazar TU-EMAIL con tu dirección de correo electrónico -->
+            <form id="confirmation-form" action="https://formsubmit.co/bodajavirocio@gmail.com" method="POST">
+                <!-- Campos ocultos para configuración -->
+                <input type="hidden" name="_subject" value="Nueva confirmación de asistencia al evento">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="gracias.html">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Nombre y Apellidos</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="attendance">¿Asistirás?</label>
+                        <select id="attendance" name="attendance" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="Sí, asistiré">Sí, asistiré</option>
+                            <option value="No podré asistir">No podré asistir</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="guests">Número de invitados</label>
+                        <input type="number" id="guests" name="guests" min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="dietary">Restricciones alimentarias</label>
+                        <input type="text" id="dietary" name="dietary" placeholder="Ej. Vegetariano, alergias...">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="message">Mensaje adicional</label>
+                        <textarea id="message" name="message" rows="4"></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <button type="submit" class="btn-submit">Enviar Confirmación</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- Script para habilitar/deshabilitar el campo de invitados -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const attendanceSelect = document.getElementById('attendance');
+    const guestsInput = document.getElementById('guests');
+    
+    // Deshabilitar el campo de número de invitados si no asistirá
+    attendanceSelect.addEventListener('change', function() {
+        if (this.value === 'No podré asistir') {
+            guestsInput.value = '0';
+            guestsInput.disabled = true;
+        } else {
+            guestsInput.value = '1';
+            guestsInput.disabled = false;
+        }
+    });
+    
+    // Guardar una copia local de los datos enviados
+    document.getElementById('confirmation-form').addEventListener('submit', function() {
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            attendance: document.getElementById('attendance').value,
+            guests: document.getElementById('guests').value,
+            dietary: document.getElementById('dietary').value,
+            message: document.getElementById('message').value,
+            date: new Date().toISOString()
+        };
+        
+        // Guardar en localStorage
+        let confirmations = JSON.parse(localStorage.getItem('eventConfirmations') || '[]');
+        confirmations.push(formData);
+        localStorage.setItem('eventConfirmations', JSON.stringify(confirmations));
+    });
+});
+</script>
+    <!-- codigo anterior servidor backend
+<section class="rsvp" id="rsvp">
+    <div class="container">
+        <h2 class="section-title">Confirmar Asistencia</h2>
+        <div class="rsvp-form">
+            <form id="confirmation-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Nombre y Apellidos</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="attendance">¿Asistirás?</label>
+                        <select id="attendance" name="attendance" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="yes">Sí, asistiré</option>
+                            <option value="no">No podré asistir</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="guests">Número de invitados</label>
+                        <input type="number" id="guests" name="guests" min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="dietary">Restricciones alimentarias</label>
+                        <input type="text" id="dietary" name="dietary" placeholder="Ej. Vegetariano, alergias...">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="message">Mensaje adicional</label>
+                        <textarea id="message" name="message" rows="4"></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <button type="submit" class="btn-submit">Enviar Confirmación</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<script src="rsvp.js"></script>-->
+</body>
