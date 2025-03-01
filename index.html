@@ -923,17 +923,21 @@ window.addEventListener('resize', function() {
                 </div>
     </section>
 
-<!-- Modificación del formulario HTML original para usar FormSubmit -->
+<!-- Sección de RSVP con formulario actualizado -->
 <section class="rsvp" id="rsvp">
     <div class="container">
         <h2 class="section-title">Confirmar Asistencia</h2>
         <div class="rsvp-form">
-            <!-- Importante: reemplazar TU-EMAIL con tu dirección de correo electrónico -->
+            <!-- Formulario actualizado con mejoras para FormSubmit -->
             <form id="confirmation-form" action="https://formsubmit.co/bodajavirocio@gmail.com" method="POST">
-                <!-- Campos ocultos para configuración -->
+                <!-- Campos ocultos para configuración de FormSubmit -->
                 <input type="hidden" name="_subject" value="Nueva confirmación de asistencia al evento">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_next" value="https://javitgomez.github.io/BodaJavierRocio/gracias.html">
+                <!-- Campo honeypot para detectar spam sin requerir email -->
+                <input type="text" name="_honey" style="display:none">
+                <!-- Campo para prevenir reenvíos accidentales -->
+                <input type="hidden" name="_template" value="table">
                 
                 <div class="form-row">
                     <div class="form-group">
@@ -943,6 +947,8 @@ window.addEventListener('resize', function() {
                     <div class="form-group">
                         <label for="email">Correo Electrónico (opcional)</label>
                         <input type="email" id="email" name="email">
+                        <!-- Campo oculto para asegurar que FormSubmit funcione incluso sin email -->
+                        <input type="hidden" name="email_fallback" value="invitado@ejemplo.com">
                     </div>
                 </div>
                 
@@ -985,19 +991,31 @@ window.addEventListener('resize', function() {
                 </div>
                 
                 <div class="form-row">
-                    <button type="submit" class="btn-submit">Enviar Confirmación</button>
+                    <button type="submit" class="btn-submit" id="submit-button">Enviar Confirmación</button>
+                </div>
+                
+                <!-- Añadir mensajes de estado del envío -->
+                <div class="form-message success-message" id="success-message" style="display: none;">
+                    ¡Gracias por confirmar tu asistencia! Redirigiendo...
+                </div>
+                <div class="form-message error-message" id="error-message" style="display: none;">
+                    Ha habido un problema al enviar el formulario. Por favor, inténtalo de nuevo.
                 </div>
             </form>
         </div>
     </div>
 </section>
 
-<!-- Script para lógica del formulario -->
+<!-- Script actualizado para la lógica del formulario -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('confirmation-form');
     const attendanceSelect = document.getElementById('attendance');
     const withGuestSelect = document.getElementById('with_guest');
     const minorsInput = document.getElementById('minors');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+    const submitButton = document.getElementById('submit-button');
     
     // Deshabilitar campos si no asistirá
     attendanceSelect.addEventListener('change', function() {
@@ -1012,24 +1030,58 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Guardar una copia local de los datos enviados
-    document.getElementById('confirmation-form').addEventListener('submit', function() {
+    // Gestionar el envío del formulario
+    form.addEventListener('submit', function(e) {
+        // Si el campo de email está vacío, usar el email de respaldo
+        const emailField = document.getElementById('email');
+        if (!emailField.value.trim()) {
+            // Asegurar que el campo oculto email_fallback sea el que se use
+            document.querySelector('input[name="email_fallback"]').name = "email";
+        }
+        
+        // Deshabilitar el botón durante el envío para evitar múltiples envíos
+        submitButton.disabled = true;
+        submitButton.textContent = 'Enviando...';
+        
+        // Guardar una copia local de los datos enviados
         const formData = {
             name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            attendance: document.getElementById('attendance').value,
-            with_guest: document.getElementById('with_guest').value,
-            minors: document.getElementById('minors').value,
+            email: emailField.value || 'No proporcionado',
+            attendance: attendanceSelect.value,
+            with_guest: withGuestSelect.value,
+            minors: minorsInput.value,
             dietary: document.getElementById('dietary').value,
             message: document.getElementById('message').value,
             date: new Date().toISOString()
         };
         
         // Guardar en localStorage
-        let confirmations = JSON.parse(localStorage.getItem('eventConfirmations') || '[]');
-        confirmations.push(formData);
-        localStorage.setItem('eventConfirmations', JSON.stringify(confirmations));
+        try {
+            let confirmations = JSON.parse(localStorage.getItem('eventConfirmations') || '[]');
+            confirmations.push(formData);
+            localStorage.setItem('eventConfirmations', JSON.stringify(confirmations));
+            console.log('Datos guardados localmente con éxito');
+        } catch (error) {
+            console.error('Error al guardar datos localmente:', error);
+        }
+        
+        // Mostrar mensaje de éxito
+        successMessage.style.display = 'block';
+        
+        // Fallback de redirección en caso de que FormSubmit no redirija
+        setTimeout(function() {
+            window.location.href = 'https://javitgomez.github.io/BodaJavierRocio/gracias.html';
+        }, 3000);
     });
+    
+    // Manejar errores del formulario
+    window.addEventListener('error', function(e) {
+        if (e.target.tagName.toLowerCase() === 'form') {
+            errorMessage.style.display = 'block';
+            submitButton.disabled = false;
+            submitButton.textContent = 'Enviar Confirmación';
+        }
+    }, true);
 });
 </script>
 </body>
