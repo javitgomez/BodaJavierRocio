@@ -972,6 +972,14 @@ window.addEventListener('resize', function() {
                     </div>
                 </div>
                 
+                <!-- Nuevo campo para el nombre del acompañante (inicialmente oculto) -->
+                <div class="form-row" id="guest_name_container" style="display: none;">
+                    <div class="form-group full-width">
+                        <label for="guest_name">Nombre y Apellidos del Acompañante</label>
+                        <input type="text" id="guest_name" name="guest_name">
+                    </div>
+                </div>
+                
                 <div class="form-row">
                     <div class="form-group">
                         <label for="minors">¿Te acompañan peques?</label>
@@ -1016,6 +1024,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const successMessage = document.getElementById('success-message');
     const errorMessage = document.getElementById('error-message');
     const submitButton = document.getElementById('submit-button');
+    const guestNameContainer = document.getElementById('guest_name_container');
+    const guestNameInput = document.getElementById('guest_name');
     
     // Deshabilitar campos si no asistirá
     attendanceSelect.addEventListener('change', function() {
@@ -1024,11 +1034,30 @@ document.addEventListener('DOMContentLoaded', function() {
             withGuestSelect.disabled = true;
             minorsInput.value = '0';
             minorsInput.disabled = true;
+            guestNameContainer.style.display = 'none';
+            guestNameInput.required = false;
         } else {
             withGuestSelect.disabled = false;
             minorsInput.disabled = false;
+            // Comprobar el estado actual del select de acompañante
+            toggleGuestNameField();
         }
     });
+    
+    // Mostrar/ocultar campo de nombre del acompañante
+    withGuestSelect.addEventListener('change', toggleGuestNameField);
+    
+    // Función para mostrar/ocultar campo de nombre del acompañante
+    function toggleGuestNameField() {
+        if (withGuestSelect.value === 'Sí' && !withGuestSelect.disabled) {
+            guestNameContainer.style.display = 'flex';
+            guestNameInput.required = true;
+        } else {
+            guestNameContainer.style.display = 'none';
+            guestNameInput.required = false;
+            guestNameInput.value = '';
+        }
+    }
     
     // Gestionar el envío del formulario
     form.addEventListener('submit', function(e) {
@@ -1049,6 +1078,7 @@ document.addEventListener('DOMContentLoaded', function() {
             email: emailField.value || 'No proporcionado',
             attendance: attendanceSelect.value,
             with_guest: withGuestSelect.value,
+            guest_name: withGuestSelect.value === 'Sí' ? guestNameInput.value : 'No aplica',
             minors: minorsInput.value,
             dietary: document.getElementById('dietary').value,
             message: document.getElementById('message').value,
@@ -1082,6 +1112,9 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = 'Enviar Confirmación';
         }
     }, true);
+    
+    // Inicializar el estado del campo de nombre del acompañante
+    toggleGuestNameField();
 });
 </script>
 </body>

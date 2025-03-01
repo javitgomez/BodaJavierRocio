@@ -293,6 +293,16 @@
             </select>
           </div>
           <div class="filter-group">
+            <label for="filter-guest-name">Nombre de acompañante</label>
+            <input
+              type="text"
+              id="filter-guest-name"
+              placeholder="Buscar por nombre de acompañante..."
+            />
+          </div>
+        </div>
+        <div class="filter-row">
+          <div class="filter-group">
             <label for="filter-dietary">Restricciones alimentarias</label>
             <input
               type="text"
@@ -300,8 +310,6 @@
               placeholder="Filtrar por restricciones..."
             />
           </div>
-        </div>
-        <div class="filter-row">
           <button
             id="apply-filters"
             class="btn"
@@ -314,8 +322,8 @@
           >
             Restablecer
           </button>
-          <div id="search-results"></div>
         </div>
+        <div id="search-results"></div>
       </div>
 
       <!-- Botones de acción principal -->
@@ -342,6 +350,7 @@
               <th>Email</th>
               <th>Asistencia</th>
               <th>Invitado</th>
+              <th>Nombre Acompañante</th>
               <th>Menores</th>
               <th>Restricciones</th>
               <th>Mensaje</th>
@@ -406,6 +415,19 @@
               <option value="Sí">Sí</option>
               <option value="No">No</option>
             </select>
+          </div>
+          <div
+            class="form-group"
+            id="edit-guest-name-container"
+            style="display: none"
+          >
+            <label for="edit-guest-name"
+              >Nombre y Apellidos del Acompañante</label
+            >
+            <input
+              type="text"
+              id="edit-guest-name"
+            />
           </div>
           <div class="form-group">
             <label for="edit-minors">Menores a su cargo</label>
@@ -563,12 +585,24 @@
               return false;
             }
 
+            // Filtro por nombre de acompañante
+            if (
+              filters.guestName &&
+              (!item.guest_name ||
+                !item.guest_name
+                  .toLowerCase()
+                  .includes(filters.guestName.toLowerCase()))
+            ) {
+              return false;
+            }
+
             // Filtro por restricciones alimentarias
             if (
               filters.dietary &&
-              !item.dietary
-                .toLowerCase()
-                .includes(filters.dietary.toLowerCase())
+              (!item.dietary ||
+                !item.dietary
+                  .toLowerCase()
+                  .includes(filters.dietary.toLowerCase()))
             ) {
               return false;
             }
@@ -606,6 +640,9 @@
               <td>${item.email || ''}</td>
               <td>${getAttendanceBadge(item.attendance || '')}</td>
               <td>${item.with_guest || 'No'}</td>
+              <td>${
+                item.with_guest === 'Sí' ? item.guest_name || '-' : '-'
+              }</td>
               <td>${item.minors || '0'}</td>
               <td>${item.dietary || '-'}</td>
               <td>${item.message || '-'}</td>
@@ -663,6 +700,24 @@
           });
         }
 
+        // Función para mostrar/ocultar el campo de nombre de acompañante en el formulario de edición
+        function toggleGuestNameField() {
+          const withGuestSelect = document.getElementById('edit-with-guest');
+          const guestNameContainer = document.getElementById(
+            'edit-guest-name-container'
+          );
+          const guestNameInput = document.getElementById('edit-guest-name');
+
+          if (withGuestSelect.value === 'Sí' && !withGuestSelect.disabled) {
+            guestNameContainer.style.display = 'block';
+            guestNameInput.required = true;
+          } else {
+            guestNameContainer.style.display = 'none';
+            guestNameInput.required = false;
+            guestNameInput.value = '';
+          }
+        }
+
         // Abrir modal de edición
         function openEditModal(index) {
           const confirmations = loadData();
@@ -676,6 +731,8 @@
             item.attendance || '';
           document.getElementById('edit-with-guest').value =
             item.with_guest || 'No';
+          document.getElementById('edit-guest-name').value =
+            item.guest_name || '';
           document.getElementById('edit-minors').value = item.minors || '0';
           document.getElementById('edit-dietary').value = item.dietary || '';
           document.getElementById('edit-message').value = item.message || '';
@@ -688,12 +745,19 @@
           const withGuestSelect = document.getElementById('edit-with-guest');
           const minorsInput = document.getElementById('edit-minors');
 
+          // Mostrar/ocultar el campo de nombre de acompañante
+          toggleGuestNameField();
+
           if (item.attendance === 'No podré asistir') {
             withGuestSelect.disabled = true;
             minorsInput.disabled = true;
+            document.getElementById('edit-guest-name-container').style.display =
+              'none';
           } else {
             withGuestSelect.disabled = false;
             minorsInput.disabled = false;
+            // Mostrar/ocultar según selección
+            toggleGuestNameField();
           }
 
           // Event listener para cambios en asistencia
@@ -703,11 +767,18 @@
               withGuestSelect.disabled = true;
               minorsInput.value = '0';
               minorsInput.disabled = true;
+              document.getElementById(
+                'edit-guest-name-container'
+              ).style.display = 'none';
             } else {
               withGuestSelect.disabled = false;
               minorsInput.disabled = false;
+              toggleGuestNameField();
             }
           });
+
+          // Event listener para cambios en acompañante
+          withGuestSelect.addEventListener('change', toggleGuestNameField);
         }
 
         // Guardar cambios de edición
@@ -718,6 +789,7 @@
 
             const index = document.getElementById('edit-index').value;
             const confirmations = loadData();
+            const withGuest = document.getElementById('edit-with-guest').value;
 
             // Actualizar los datos
             confirmations[index] = {
@@ -725,7 +797,11 @@
               name: document.getElementById('edit-name').value,
               email: document.getElementById('edit-email').value,
               attendance: document.getElementById('edit-attendance').value,
-              with_guest: document.getElementById('edit-with-guest').value,
+              with_guest: withGuest,
+              guest_name:
+                withGuest === 'Sí'
+                  ? document.getElementById('edit-guest-name').value
+                  : '',
               minors: document.getElementById('edit-minors').value,
               dietary: document.getElementById('edit-dietary').value,
               message: document.getElementById('edit-message').value,
@@ -777,7 +853,7 @@
 
             // Cabeceras CSV
             let csvContent =
-              'Fecha,Nombre,Email,Asistencia,Invitado Adicional,Menores,Restricciones Alimentarias,Mensaje\n';
+              'Fecha,Nombre,Email,Asistencia,Invitado Adicional,Nombre Acompañante,Menores,Restricciones Alimentarias,Mensaje\n';
 
             // Añadir cada fila
             confirmations.forEach((item) => {
@@ -791,6 +867,11 @@
                 `"${(item.email || '').replace(/"/g, '""')}"`,
                 `"${(item.attendance || '').replace(/"/g, '""')}"`,
                 `"${(item.with_guest || 'No').replace(/"/g, '""')}"`,
+                `"${
+                  item.with_guest === 'Sí'
+                    ? (item.guest_name || '').replace(/"/g, '""')
+                    : ''
+                }"`,
                 item.minors || '0',
                 `"${(item.dietary || '').replace(/"/g, '""')}"`,
                 `"${(item.message || '').replace(/"/g, '""')}"`,
@@ -837,6 +918,7 @@
             const filters = {
               name: document.getElementById('filter-name').value,
               attendance: document.getElementById('filter-attendance').value,
+              guestName: document.getElementById('filter-guest-name').value,
               dietary: document.getElementById('filter-dietary').value,
             };
 
@@ -849,6 +931,7 @@
             // Limpiar todos los campos de filtro
             document.getElementById('filter-name').value = '';
             document.getElementById('filter-attendance').value = '';
+            document.getElementById('filter-guest-name').value = '';
             document.getElementById('filter-dietary').value = '';
 
             // Restablecer la vista
