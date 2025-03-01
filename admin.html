@@ -386,11 +386,10 @@
             />
           </div>
           <div class="form-group">
-            <label for="edit-email">Correo Electrónico</label>
+            <label for="edit-email">Correo Electrónico (opcional)</label>
             <input
               type="email"
               id="edit-email"
-              required
             />
           </div>
           <div class="form-group">
@@ -790,12 +789,13 @@
             const index = document.getElementById('edit-index').value;
             const confirmations = loadData();
             const withGuest = document.getElementById('edit-with-guest').value;
+            const emailValue = document.getElementById('edit-email').value;
 
             // Actualizar los datos
             confirmations[index] = {
               ...confirmations[index],
               name: document.getElementById('edit-name').value,
-              email: document.getElementById('edit-email').value,
+              email: emailValue || 'No proporcionado', // Usar valor por defecto si está vacío
               attendance: document.getElementById('edit-attendance').value,
               with_guest: withGuest,
               guest_name:
@@ -864,7 +864,7 @@
               const row = [
                 formattedDate,
                 `"${(item.name || '').replace(/"/g, '""')}"`,
-                `"${(item.email || '').replace(/"/g, '""')}"`,
+                `"${(item.email || 'No proporcionado').replace(/"/g, '""')}"`,
                 `"${(item.attendance || '').replace(/"/g, '""')}"`,
                 `"${(item.with_guest || 'No').replace(/"/g, '""')}"`,
                 `"${
