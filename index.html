@@ -124,6 +124,11 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        nav.nav-hidden {
+            transform: translateY(-100%);
         }
 
         nav ul {
@@ -531,7 +536,7 @@
             min-height: 120px;
         }
 
-        .submit-btn {
+        .btn-submit {
             background: linear-gradient(to right, var(--accent-color), var(--accent-color-dark));
             color: white;
             border: none;
@@ -547,7 +552,7 @@
             letter-spacing: 2px;
         }
 
-        .submit-btn:hover {
+        .btn-submit:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(208, 163, 124, 0.3);
         }
@@ -686,7 +691,7 @@
         </div>
     </header>
 
-    <nav>
+    <nav id="navbar">
         <ul>
             <li><a href="#info">Información</a></li>
             <li><a href="#countdown">Cuenta Atrás</a></li>
@@ -694,7 +699,6 @@
             <li><a href="#rsvp">Confirmar Asistencia</a></li>
         </ul>
     </nav>
-
     <section class="countdown" id="countdown">
         <div class="container">
             <h2 class="section-title">Cuenta Atrás</h2>
@@ -884,7 +888,7 @@
                 </div>
     </section>
 
-    <!-- Modificación del formulario HTML original para usar FormSubmit -->
+<!-- Modificación del formulario HTML original para usar FormSubmit -->
 <section class="rsvp" id="rsvp">
     <div class="container">
         <h2 class="section-title">Confirmar Asistencia</h2>
@@ -902,8 +906,8 @@
                         <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Correo Electrónico</label>
-                        <input type="email" id="email" name="email" required>
+                        <label for="email">Correo Electrónico (opcional)</label>
+                        <input type="email" id="email" name="email">
                     </div>
                 </div>
                 
