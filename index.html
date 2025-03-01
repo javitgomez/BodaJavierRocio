@@ -699,6 +699,41 @@
             <li><a href="#rsvp">Confirmar Asistencia</a></li>
         </ul>
     </nav>
+    <script>
+        // Función para controlar la visibilidad del navbar al hacer scroll
+let lastScrollTop = 0;
+const navbar = document.getElementById('navbar');
+const scrollThreshold = 10; // Umbral de desplazamiento para activar la ocultación
+
+window.addEventListener('scroll', function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Comprobar si es un dispositivo móvil (basado en el ancho de pantalla)
+    if (window.innerWidth <= 768) {
+        // Si el scroll es mayor que el umbral y estamos desplazándonos hacia abajo
+        if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+            navbar.classList.add('nav-hidden');
+        } else {
+            // Si nos desplazamos hacia arriba, mostrar la navegación
+            navbar.classList.remove('nav-hidden');
+        }
+    } else {
+        // En pantallas más grandes, siempre mostrar la navegación
+        navbar.classList.remove('nav-hidden');
+    }
+    
+    lastScrollTop = scrollTop;
+});
+
+// También restablecer la visibilidad al cambiar el tamaño de la ventana
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+        navbar.classList.remove('nav-hidden');
+    }
+});
+    </script>
+
+    
     <section class="countdown" id="countdown">
         <div class="container">
             <h2 class="section-title">Cuenta Atrás</h2>
