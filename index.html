@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Montserrat:wght@300;400;500&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.10.3/simple-lightbox.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"><style>
         :root {
             --primary-color: #f4ece2;
             --secondary-color: #f9f5f1;
@@ -370,89 +371,91 @@
         }
 
         /* Gallery */
-        .gallery {
-            background-color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .gallery::after {
-            content: '';
-            position: absolute;
-            bottom: -150px;
-            left: -150px;
-            width: 300px;
-            height: 300px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='rgba(208,163,124,0.2)' stroke-width='1'/%3E%3C/svg%3E");
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: 0;
-        }
-
-        .gallery-heading {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .gallery-heading p {
-            max-width: 700px;
-            margin: 1rem auto;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
-            font-style: italic;
-            color: var(--text-color);
-        }
-
-        .gallery-container {
+       .gallery-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-            position: relative;
-            z-index: 1;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
         }
-
+        
         .gallery-item {
-            height: 300px;
-            overflow: hidden;
-            border-radius: 15px;
             position: relative;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 10px;
         }
-
+        
         .gallery-item img {
             width: 100%;
-            height: 100%;
+            height: 250px;
             object-fit: cover;
-            transition: transform 0.5s;
+            display: block;
+            transition: transform 0.3s ease;
         }
-
+        
         .gallery-item:hover img {
             transform: scale(1.05);
         }
-
+        
         .gallery-overlay {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
-            opacity: 0;
-            transition: opacity 0.3s;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
             display: flex;
             justify-content: center;
-            align-items: flex-end;
-            padding-bottom: 2rem;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none; /* Permite que los clics pasen a través del overlay */
         }
-
+        
         .gallery-item:hover .gallery-overlay {
             opacity: 1;
         }
-
+        
         .gallery-icon {
             color: white;
             font-size: 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .gallery-heading {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        /* Estilos adicionales para SimpleLightbox */
+        .sl-wrapper .sl-image {
+            max-width: 95vw; /* Límite de ancho al 95% del viewport */
+            max-height: 90vh; /* Límite de altura al 90% del viewport */
+        }
+        
+        .sl-wrapper .sl-image img {
+            max-height: 90vh !important; /* Forzar altura máxima */
+            max-width: 95vw !important; /* Forzar ancho máximo */
+            object-fit: contain !important; /* Mantener proporciones */
+        }
+        
+        /* Mejorar la visibilidad de los botones en móvil */
+        .sl-wrapper .sl-navigation button {
+            font-size: 30px !important;
+            width: 40px;
+            height: 60px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .sl-wrapper .sl-navigation button {
+                font-size: 24px !important;
+            }
         }
 
         /* RSVP */
@@ -886,85 +889,95 @@ window.addEventListener('resize', function() {
 
     <!-- HTML para la galería con lightbox -->
 <section class="gallery" id="gallery">
-    <div class="container">
-        <h2 class="section-title">Nuestra Historia</h2>
-        <div class="gallery-heading">
-            <p>Un viaje de amor que comenzó hace años y que ahora nos lleva hasta el altar. Estos son algunos de nuestros momentos más especiales.</p>
-        </div>
-        <div class="gallery-container">
-            <div class="gallery-item">
-                <img src="img/1.jpg" alt="Imagen de la pareja" onclick="openLightbox('img/1.jpg')">
-                <div class="gallery-overlay">
-                    <i class="fas fa-heart gallery-icon"></i>
-                </div>
+        <div class="container">
+            <h2 class="section-title">Nuestra Historia</h2>
+            <div class="gallery-heading">
+                <p>Un viaje de amor que comenzó hace años y que ahora nos lleva hasta el altar. Estos son algunos de nuestros momentos más especiales.</p>
             </div>
-            <div class="gallery-item">
-                <img src="img/2.jpg" alt="Imagen de la pareja" onclick="openLightbox('img/2.jpg')">
-                <div class="gallery-overlay">
-                    <i class="fas fa-heart gallery-icon"></i>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="img/3.jpg" alt="Imagen de la pareja" onclick="openLightbox('img/3.jpg')">
-                <div class="gallery-overlay">
-                    <i class="fas fa-heart gallery-icon"></i>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="img/4.jpg" alt="Imagen de la pareja" onclick="openLightbox('img/4.jpg')">
-                <div class="gallery-overlay">
-                    <i class="fas fa-heart gallery-icon"></i>
-                </div>
-            </div>
-            <div class="gallery-item">
+            <div class="gallery-container">
+                <a href="img/1.jpg" class="gallery-item" title="Nuestro primer viaje juntos">
+                    <img src="img/1.jpg" alt="Imagen de la pareja">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-heart gallery-icon"></i>
+                    </div>
+                </a>
+                <a href="img/2.jpg" class="gallery-item" title="Celebrando nuestro aniversario">
+                    <img src="img/2.jpg" alt="Imagen de la pareja">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-heart gallery-icon"></i>
+                    </div>
+                </a>
+                <a href="img/3.jpg" class="gallery-item" title="El día de la propuesta">
+                    <img src="img/3.jpg" alt="Imagen de la pareja">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-heart gallery-icon"></i>
+                    </div>
+                </a>
+                <a href="img/4.jpg" class="gallery-item" title="Nuestra sesión de compromiso">
+                    <img src="img/4.jpg" alt="Imagen de la pareja">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-heart gallery-icon"></i>
+                    </div>
+                </a>
+                <a href="img/5.jpg" class="gallery-item" title="Momentos especiales">
                     <img src="img/5.jpg" alt="Imagen de la pareja">
                     <div class="gallery-overlay">
                         <i class="fas fa-heart gallery-icon"></i>
                     </div>
-                </div>
-                <div class="gallery-item">
+                </a>
+                <a href="img/6.jpg" class="gallery-item" title="Preparando nuestra boda">
                     <img src="img/6.jpg" alt="Imagen de la pareja">
                     <div class="gallery-overlay">
                         <i class="fas fa-heart gallery-icon"></i>
                     </div>
-                </div>
+                </a>
+                <a href="img/7.jpg" class="gallery-item" title="Viaje de la pedida de mano">
+                    <img src="img/7.jpg" alt="Imagen de la pareja">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-heart gallery-icon"></i>
+                    </div>
+                </a>
+                <a href="img/8.jpg" class="gallery-item" title="Pedida de mano en Marruecos">
+                    <img src="img/8.jpg" alt="Imagen de la pareja">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-heart gallery-icon"></i>
+                    </div>
+                </a>
+            </div>
         </div>
-    </div>
-</section>
-
-<!-- Lightbox -->
-<div id="lightbox" class="lightbox">
-    <span class="close" onclick="closeLightbox()">&times;</span>
-    <img class="lightbox-content" id="lightbox-img">
-</div>
-
-
-
-<script>
-// JavaScript para el funcionamiento del lightbox
-function openLightbox(imgSrc) {
-    document.getElementById('lightbox').style.display = 'block';
-    document.getElementById('lightbox-img').src = imgSrc;
-}
-
-function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
-}
-
-// Cerrar el lightbox al hacer clic fuera de la imagen
-document.getElementById('lightbox').addEventListener('click', function(event) {
-    if (event.target === this) {
-        closeLightbox();
-    }
-});
-
-// Cerrar el lightbox con la tecla ESC
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-        closeLightbox();
-    }
-});
-</script>
+    </section>
+ <!-- SimpleLightbox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.10.3/simple-lightbox.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            new SimpleLightbox('.gallery-container a', {
+                // Opciones para mejorar la experiencia
+                captions: true,
+                captionPosition: 'bottom',
+                captionsData: 'title',
+                captionDelay: 200,
+                closeText: '×',
+                navText: ['←','→'],
+                alertError: 'No se pudo cargar la imagen',
+                history: false,
+                
+                // Opciones de escala y respuesta
+                scaleImageToRatio: true,           // Escalar imágenes manteniendo ratio
+                maxZoom: 1.5,                      // Limitar el zoom máximo
+                disableRightClick: false,          // Permitir guardar imágenes
+                widthRatio: 0.9,                   // Usar 90% del ancho disponible
+                heightRatio: 0.9,                  // Usar 90% de la altura disponible
+                animationSpeed: 250,               // Animación más rápida
+                
+                // Opciones para móvil
+                uniqueImages: true,
+                showCounter: true,
+                enableKeyboard: true,
+                docClose: true,                    // Cerrar al hacer clic fuera de la imagen
+                swipeClose: true                   // Permitir deslizar para cerrar en móvil
+            });
+        });
+    </script>
 
 <!-- Sección de RSVP con formulario actualizado -->
 <section class="rsvp" id="rsvp">
