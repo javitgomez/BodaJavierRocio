@@ -916,6 +916,18 @@ window.addEventListener('resize', function() {
                     <i class="fas fa-heart gallery-icon"></i>
                 </div>
             </div>
+            <div class="gallery-item">
+                    <img src="img/5.jpg" alt="Imagen de la pareja">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-heart gallery-icon"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="img/6.jpg" alt="Imagen de la pareja">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-heart gallery-icon"></i>
+                    </div>
+                </div>
         </div>
     </div>
 </section>
@@ -926,48 +938,7 @@ window.addEventListener('resize', function() {
     <img class="lightbox-content" id="lightbox-img">
 </div>
 
-<style>
-/* Estilo para el lightbox */
-.lightbox {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    padding-top: 50px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.9);
-}
 
-.lightbox-content {
-    margin: auto;
-    display: block;
-    max-width: 90%;
-    max-height: 90%;
-}
-
-.close {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* Mejorando la experiencia de usuario en la galería */
-.gallery-item {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover {
-    transform: scale(1.05);
-}
-</style>
 
 <script>
 // JavaScript para el funcionamiento del lightbox
