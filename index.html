@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +9,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Montserrat:wght@300;400;500&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Italiana&family=Montserrat:wght@300;400;500&family=Cormorant+Garamond:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.10.3/simple-lightbox.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"><style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
         :root {
             --primary-color: #f4ece2;
             --secondary-color: #f9f5f1;
             --accent-color: #d0a37c;
             --accent-color-dark: #b68e6e;
             --text-color: #5c5c5c;
-            --light-text: #fff;
+            --light-text: #2c2c2c;
             --dark-text: #2c2c2c;
             --blue-accent: #6dacc3;
         }
@@ -36,7 +40,10 @@
             font-weight: 300;
         }
 
-        h1, h2, h3, h4 {
+        h1,
+        h2,
+        h3,
+        h4 {
             font-family: "Great Vibes", serif;
             font-weight: 400;
             font-style: normal;
@@ -45,7 +52,10 @@
         /* Header */
         header {
             height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/api/placeholder/1200/800') center/cover no-repeat;
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2)),
+                url('1.jpg') center/cover no-repeat fixed;
+            background-position: center 20%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -81,16 +91,19 @@
             font-size: 2.5rem;
             color: var(--light-text);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
             z-index: 2;
         }
 
         .header-content {
             position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin-top: 50px;
+            z-index: 2;
+            padding: 1.5rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            /* caja oscura */
+            border-radius: 12px;
         }
+
 
         .header-content h1 {
             font-size: 5rem;
@@ -100,14 +113,14 @@
         }
 
         .header-content h2 {
-            font-size: 2rem;
+            font-size: 2.4rem;
             margin-bottom: 2rem;
-            font-weight: 300;
+            font-weight: 600;
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
         }
 
-        .header-date {
+        /*  .header-date {
             display: inline-block;
             border: 1px solid rgba(255, 255, 255, 0.5);
             padding: 1rem 2rem;
@@ -116,7 +129,24 @@
             letter-spacing: 3px;
             margin-top: 1rem;
             background-color: rgba(255, 255, 255, 0.1);
+        }*/
+
+        .header-date {
+            display: inline-block;
+            padding: 1.2rem 2.6rem;
+            border-radius: 6px;
+            font-size: 2.0rem;
+            /* más grande */
+            font-weight: 600;
+            /* más grueso */
+            letter-spacing: 4px;
+            /* un pelín más separado */
+            margin-top: 1.5rem;
+            color: #050404;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
         }
+
 
         /* Navigation */
         nav {
@@ -222,7 +252,8 @@
             overflow: hidden;
         }
 
-        .countdown::before, .countdown::after {
+        .countdown::before,
+        .countdown::after {
             content: '';
             position: absolute;
             width: 300px;
@@ -371,19 +402,19 @@
         }
 
         /* Gallery */
-       .gallery-container {
+        .gallery-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
             padding: 20px;
         }
-        
+
         .gallery-item {
             position: relative;
             overflow: hidden;
             border-radius: 10px;
         }
-        
+
         .gallery-item img {
             width: 100%;
             height: 250px;
@@ -391,11 +422,11 @@
             display: block;
             transition: transform 0.3s ease;
         }
-        
+
         .gallery-item:hover img {
             transform: scale(1.05);
         }
-        
+
         .gallery-overlay {
             position: absolute;
             top: 0;
@@ -408,23 +439,24 @@
             align-items: center;
             opacity: 0;
             transition: opacity 0.3s ease;
-            pointer-events: none; /* Permite que los clics pasen a través del overlay */
+            pointer-events: none;
+            /* Permite que los clics pasen a través del overlay */
         }
-        
+
         .gallery-item:hover .gallery-overlay {
             opacity: 1;
         }
-        
+
         .gallery-icon {
             color: white;
             font-size: 2rem;
         }
-        
+
         .section-title {
             text-align: center;
             margin-bottom: 20px;
         }
-        
+
         .gallery-heading {
             text-align: center;
             max-width: 800px;
@@ -433,16 +465,21 @@
 
         /* Estilos adicionales para SimpleLightbox */
         .sl-wrapper .sl-image {
-            max-width: 95vw; /* Límite de ancho al 95% del viewport */
-            max-height: 90vh; /* Límite de altura al 90% del viewport */
+            max-width: 95vw;
+            /* Límite de ancho al 95% del viewport */
+            max-height: 90vh;
+            /* Límite de altura al 90% del viewport */
         }
-        
+
         .sl-wrapper .sl-image img {
-            max-height: 90vh !important; /* Forzar altura máxima */
-            max-width: 95vw !important; /* Forzar ancho máximo */
-            object-fit: contain !important; /* Mantener proporciones */
+            max-height: 90vh !important;
+            /* Forzar altura máxima */
+            max-width: 95vw !important;
+            /* Forzar ancho máximo */
+            object-fit: contain !important;
+            /* Mantener proporciones */
         }
-        
+
         /* Mejorar la visibilidad de los botones en móvil */
         .sl-wrapper .sl-navigation button {
             font-size: 30px !important;
@@ -451,7 +488,7 @@
             background-color: rgba(0, 0, 0, 0.2);
             border-radius: 5px;
         }
-        
+
         @media screen and (max-width: 768px) {
             .sl-wrapper .sl-navigation button {
                 font-size: 24px !important;
@@ -559,7 +596,7 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(208, 163, 124, 0.3);
         }
-        
+
         .form-message {
             text-align: center;
             margin-top: 20px;
@@ -567,13 +604,13 @@
             border-radius: 8px;
             display: none;
         }
-        
+
         .success-message {
             background-color: rgba(76, 175, 80, 0.1);
             color: #4CAF50;
             border: 1px solid #4CAF50;
         }
-        
+
         .error-message {
             background-color: rgba(244, 67, 54, 0.1);
             color: #F44336;
@@ -617,7 +654,7 @@
             .header-content h1 {
                 font-size: 3.5rem;
             }
-            
+
             .names-monogram {
                 top: 30px;
                 width: 120px;
@@ -628,13 +665,18 @@
 
         @media (max-width: 768px) {
             .header-content h1 {
-                font-size: 2.8rem;
+                font-size: 2.6rem;
+                font-weight: 600;
             }
 
             .header-content h2 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
+                font-weight: 600;
+                margin-bottom: 1.5rem;
             }
-            
+
+
+
             .names-monogram {
                 width: 100px;
                 height: 100px;
@@ -683,6 +725,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="header-overlay"></div>
@@ -690,7 +733,7 @@
         <div class="header-content">
             <h1>Javier & Rocío</h1>
             <h2>¡Nos casamos!</h2>
-            <div class="header-date">06 · Junio · 2026</div>
+            <div class="header-date">06 · junio · 2026</div>
         </div>
     </header>
 
@@ -704,39 +747,39 @@
     </nav>
     <script>
         // Función para controlar la visibilidad del navbar al hacer scroll
-let lastScrollTop = 0;
-const navbar = document.getElementById('navbar');
-const scrollThreshold = 10; // Umbral de desplazamiento para activar la ocultación
+        let lastScrollTop = 0;
+        const navbar = document.getElementById('navbar');
+        const scrollThreshold = 10; // Umbral de desplazamiento para activar la ocultación
 
-window.addEventListener('scroll', function() {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    // Comprobar si es un dispositivo móvil (basado en el ancho de pantalla)
-    if (window.innerWidth <= 768) {
-        // Si el scroll es mayor que el umbral y estamos desplazándonos hacia abajo
-        if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
-            navbar.classList.add('nav-hidden');
-        } else {
-            // Si nos desplazamos hacia arriba, mostrar la navegación
-            navbar.classList.remove('nav-hidden');
-        }
-    } else {
-        // En pantallas más grandes, siempre mostrar la navegación
-        navbar.classList.remove('nav-hidden');
-    }
-    
-    lastScrollTop = scrollTop;
-});
+        window.addEventListener('scroll', function () {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-// También restablecer la visibilidad al cambiar el tamaño de la ventana
-window.addEventListener('resize', function() {
-    if (window.innerWidth > 768) {
-        navbar.classList.remove('nav-hidden');
-    }
-});
+            // Comprobar si es un dispositivo móvil (basado en el ancho de pantalla)
+            if (window.innerWidth <= 768) {
+                // Si el scroll es mayor que el umbral y estamos desplazándonos hacia abajo
+                if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                    navbar.classList.add('nav-hidden');
+                } else {
+                    // Si nos desplazamos hacia arriba, mostrar la navegación
+                    navbar.classList.remove('nav-hidden');
+                }
+            } else {
+                // En pantallas más grandes, siempre mostrar la navegación
+                navbar.classList.remove('nav-hidden');
+            }
+
+            lastScrollTop = scrollTop;
+        });
+
+        // También restablecer la visibilidad al cambiar el tamaño de la ventana
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 768) {
+                navbar.classList.remove('nav-hidden');
+            }
+        });
     </script>
 
-    
+
     <section class="countdown" id="countdown">
         <div class="container">
             <h2 class="section-title">Cuenta Atrás</h2>
@@ -760,47 +803,47 @@ window.addEventListener('resize', function() {
             </div>
         </div>
     </section>
-    
+
     <script>
-    // Función para actualizar la cuenta atrás
-    function updateCountdown() {
-    // Fecha objetivo: 6 de junio de 2026 a las 11:30 am
-    const targetDate = new Date('June 6, 2026 11:30:00').getTime();
-    
-    // Fecha actual
-    const now = new Date().getTime();
-    
-    // Diferencia de tiempo entre ahora y la fecha objetivo
-    const timeLeft = targetDate - now;
-    
-    // Cálculos de tiempo
-    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-    
-    // Actualizar los elementos HTML
-    document.getElementById('days').textContent = days.toString().padStart(2, '0');
-    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-    
-    // Si la cuenta atrás ha terminado
-    if (timeLeft < 0) {
-        clearInterval(countdownInterval);
-        document.getElementById('days').textContent = '00';
-        document.getElementById('hours').textContent = '00';
-        document.getElementById('minutes').textContent = '00';
-        document.getElementById('seconds').textContent = '00';
-    }
-}
+        // Función para actualizar la cuenta atrás
+        function updateCountdown() {
+            // Fecha objetivo: 6 de junio de 2026 a las 11:30 am
+            const targetDate = new Date('June 6, 2026 11:30:00').getTime();
 
-    // Actualizar cada segundo
-    const countdownInterval = setInterval(updateCountdown, 1000);
+            // Fecha actual
+            const now = new Date().getTime();
 
-    // Ejecutar la función inmediatamente para evitar el retraso de un segundo
-    updateCountdown();
-    
+            // Diferencia de tiempo entre ahora y la fecha objetivo
+            const timeLeft = targetDate - now;
+
+            // Cálculos de tiempo
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            // Actualizar los elementos HTML
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+
+            // Si la cuenta atrás ha terminado
+            if (timeLeft < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+
+        // Actualizar cada segundo
+        const countdownInterval = setInterval(updateCountdown, 1000);
+
+        // Ejecutar la función inmediatamente para evitar el retraso de un segundo
+        updateCountdown();
+
     </script>
 
     <section class="info" id="info">
@@ -826,357 +869,349 @@ window.addEventListener('resize', function() {
             </div>
 
             <!-- Sección para el mapa de ubicación -->
-<section class="location" id="location">
- <div class="container">
-        <h2 class="section-title">Ubicación de la Iglesia</h2>
-        <div class="map-container">
-            <!-- Iframe de Google Maps -->
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6254.6706588775605!2d-0.45261325041534844!3d38.38749499693723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6239fac7c9f6df%3A0x1140f9d64312308d!2sMonasterio%20de%20Santa%20Faz.%20Can%C3%B3nigas%20Regulares%20Lateranenses%20de%20San%20Agust%C3%ADn!5e0!3m2!1ses!2ses!4v1740568401202!5m2!1ses!2ses" 
-                width="100%" 
-                height="450" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
-        <div class="location-info">
-            <p><strong>Dirección:</strong> Calle Mayor, 2, 03559 Santa Faz, Alicante</p>
-        </div>
-    </div>
-</section>
+            <section class="location" id="location">
+                <div class="container">
+                    <h2 class="section-title">Ubicación de la Iglesia</h2>
+                    <div class="map-container">
+                        <!-- Iframe de Google Maps -->
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6254.6706588775605!2d-0.45261325041534844!3d38.38749499693723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6239fac7c9f6df%3A0x1140f9d64312308d!2sMonasterio%20de%20Santa%20Faz.%20Can%C3%B3nigas%20Regulares%20Lateranenses%20de%20San%20Agust%C3%ADn!5e0!3m2!1ses!2ses!4v1740568401202!5m2!1ses!2ses"
+                            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="location-info">
+                        <p><strong>Dirección:</strong> Calle Mayor, 2, 03559 Santa Faz, Alicante</p>
+                    </div>
+                </div>
+            </section>
 
-<section class="location" id="location">
-<div class="container">
-        <h2 class="section-title">Parking Gratuito Ceremonia</h2>
-        <div class="map-container">
-            <!-- Iframe de Google Maps -->
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2446.729277305547!2d-0.44348259118023314!3d38.39100893496784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6239c85867cb25%3A0x83cad7e9ac920d4b!2sAparcamiento%20Mercado%20Santa%20Faz!5e0!3m2!1ses!2ses!4v1740573096579!5m2!1ses!2ses" 
-                width="100%" 
-                height="450" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+            <section class="location" id="location">
+                <div class="container">
+                    <h2 class="section-title">Parking Gratuito Ceremonia</h2>
+                    <div class="map-container">
+                        <!-- Iframe de Google Maps -->
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2446.729277305547!2d-0.44348259118023314!3d38.39100893496784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6239c85867cb25%3A0x83cad7e9ac920d4b!2sAparcamiento%20Mercado%20Santa%20Faz!5e0!3m2!1ses!2ses!4v1740573096579!5m2!1ses!2ses"
+                            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
 
-        </div>
-    </div>
-</section>
+                    </div>
+                </div>
+            </section>
 
-<section class="location" id="location">
-    <div class="container">
-        <h2 class="section-title">Ubicación de la Celebración</h2>
-        <div class="map-container">
-            <!-- Iframe de Google Maps -->
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170.273024469798!2d-6.0077868232484815!3d37.37780577201435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd62375bfafff477%3A0x58715a53ea1f6170!2sAv.%20de%20la%20Innovaci%C3%B3n%2C%2041020%20Sevilla!5e0!3m2!1ses!2ses!4v1708977722015!5m2!1ses!2ses" 
-                width="100%" 
-                height="450" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
-        <div class="location-info">
-            <p><strong>Dirección:</strong> Calle del Te, 5, 03599 Alicante, Alicante</p>
-        </div>
-    </div>
-</section>
+            <section class="location" id="location">
+                <div class="container">
+                    <h2 class="section-title">Ubicación de la Celebración</h2>
+                    <div class="map-container">
+                        <!-- Iframe de Google Maps -->
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3170.273024469798!2d-6.0077868232484815!3d37.37780577201435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd62375bfafff477%3A0x58715a53ea1f6170!2sAv.%20de%20la%20Innovaci%C3%B3n%2C%2041020%20Sevilla!5e0!3m2!1ses!2ses!4v1708977722015!5m2!1ses!2ses"
+                            width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="location-info">
+                        <p><strong>Dirección:</strong> Calle del Te, 5, 03599 Alicante, Alicante</p>
+                    </div>
+                </div>
+            </section>
 
-    <!-- HTML para la galería con lightbox -->
-<section class="gallery" id="gallery">
-        <div class="container">
-            <h2 class="section-title">Nuestra Historia</h2>
-            <div class="gallery-heading">
-                <p>Un viaje de amor que comenzó hace años y que ahora nos lleva hasta el altar. Estos son algunos de nuestros momentos más especiales.</p>
-            </div>
-            <div class="gallery-container">
-                <a href="img/1.jpg" class="gallery-item" title="Nuestro viaje juntos">
-                    <img src="img/1.jpg" alt="Imagen de la pareja">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-heart gallery-icon"></i>
+            <!-- HTML para la galería con lightbox -->
+            <section class="gallery" id="gallery">
+                <div class="container">
+                    <h2 class="section-title">Nuestra Historia</h2>
+                    <div class="gallery-heading">
+                        <p>Un viaje de amor que comenzó hace años y que ahora nos lleva hasta el altar. Estos son
+                            algunos de nuestros momentos más especiales.</p>
                     </div>
-                </a>
-                <a href="img/2.jpg" class="gallery-item" title="Celebrando nuestro aniversario">
-                    <img src="img/2.jpg" alt="Imagen de la pareja">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-heart gallery-icon"></i>
+                    <div class="gallery-container">
+                        <a href="img/1.jpg" class="gallery-item" title="Nuestro viaje juntos">
+                            <img src="img/1.jpg" alt="Imagen de la pareja">
+                            <div class="gallery-overlay">
+                                <i class="fas fa-heart gallery-icon"></i>
+                            </div>
+                        </a>
+                        <a href="img/2.jpg" class="gallery-item" title="Celebrando nuestro aniversario">
+                            <img src="img/2.jpg" alt="Imagen de la pareja">
+                            <div class="gallery-overlay">
+                                <i class="fas fa-heart gallery-icon"></i>
+                            </div>
+                        </a>
+                        <a href="img/3.jpg" class="gallery-item" title="día de la propuesta">
+                            <img src="img/3.jpg" alt="Imagen de la pareja">
+                            <div class="gallery-overlay">
+                                <i class="fas fa-heart gallery-icon"></i>
+                            </div>
+                        </a>
+                        <a href="img/4.jpg" class="gallery-item" title="Viaje a la Palma">
+                            <img src="img/4.jpg" alt="Imagen de la pareja">
+                            <div class="gallery-overlay">
+                                <i class="fas fa-heart gallery-icon"></i>
+                            </div>
+                        </a>
+                        <a href="img/5.jpg" class="gallery-item" title="Momentos especiales">
+                            <img src="img/5.jpg" alt="Imagen de la pareja">
+                            <div class="gallery-overlay">
+                                <i class="fas fa-heart gallery-icon"></i>
+                            </div>
+                        </a>
+                        <a href="img/6.jpg" class="gallery-item" title="Preparando nuestra boda">
+                            <img src="img/6.jpg" alt="Imagen de la pareja">
+                            <div class="gallery-overlay">
+                                <i class="fas fa-heart gallery-icon"></i>
+                            </div>
+                        </a>
+                        <a href="img/7.jpg" class="gallery-item" title="Viaje de la pedida de mano">
+                            <img src="img/7.jpg" alt="Imagen de la pareja">
+                            <div class="gallery-overlay">
+                                <i class="fas fa-heart gallery-icon"></i>
+                            </div>
+                        </a>
+                        <a href="img/8.jpeg" class="gallery-item" title="Pedida de mano en Marruecos">
+                            <img src="img/8.jpeg" alt="Imagen de la pareja">
+                            <div class="gallery-overlay">
+                                <i class="fas fa-heart gallery-icon"></i>
+                            </div>
+                        </a>
+                        <a href="img/9.jpeg" class="gallery-item" title="Fotitos juntos">
+                            <img src="img/9.jpeg" alt="Imagen de la pareja">
+                            <div class="gallery-overlay">
+                                <i class="fas fa-heart gallery-icon"></i>
+                            </div>
+                        </a>
                     </div>
-                </a>
-                <a href="img/3.jpg" class="gallery-item" title="día de la propuesta">
-                    <img src="img/3.jpg" alt="Imagen de la pareja">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-heart gallery-icon"></i>
-                    </div>
-                </a>
-                <a href="img/4.jpg" class="gallery-item" title="Viaje a la Palma">
-                    <img src="img/4.jpg" alt="Imagen de la pareja">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-heart gallery-icon"></i>
-                    </div>
-                </a>
-                <a href="img/5.jpg" class="gallery-item" title="Momentos especiales">
-                    <img src="img/5.jpg" alt="Imagen de la pareja">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-heart gallery-icon"></i>
-                    </div>
-                </a>
-                <a href="img/6.jpg" class="gallery-item" title="Preparando nuestra boda">
-                    <img src="img/6.jpg" alt="Imagen de la pareja">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-heart gallery-icon"></i>
-                    </div>
-                </a>
-                <a href="img/7.jpg" class="gallery-item" title="Viaje de la pedida de mano">
-                    <img src="img/7.jpg" alt="Imagen de la pareja">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-heart gallery-icon"></i>
-                    </div>
-                </a>
-                <a href="img/8.jpeg" class="gallery-item" title="Pedida de mano en Marruecos">
-                    <img src="img/8.jpeg" alt="Imagen de la pareja">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-heart gallery-icon"></i>
-                    </div>
-                </a>
-                <a href="img/9.jpeg" class="gallery-item" title="Fotitos juntos">
-                    <img src="img/9.jpeg" alt="Imagen de la pareja">
-                    <div class="gallery-overlay">
-                        <i class="fas fa-heart gallery-icon"></i>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
- <!-- SimpleLightbox JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.10.3/simple-lightbox.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            new SimpleLightbox('.gallery-container a', {
-                // Opciones para mejorar la experiencia
-                captions: true,
-                captionPosition: 'bottom',
-                captionsData: 'title',
-                captionDelay: 200,
-                closeText: '×',
-                navText: ['←','→'],
-                alertError: 'No se pudo cargar la imagen',
-                history: false,
-                
-                // Opciones de escala y respuesta
-                scaleImageToRatio: true,           // Escalar imágenes manteniendo ratio
-                maxZoom: 1.5,                      // Limitar el zoom máximo
-                disableRightClick: false,          // Permitir guardar imágenes
-                widthRatio: 0.9,                   // Usar 90% del ancho disponible
-                heightRatio: 0.9,                  // Usar 90% de la altura disponible
-                animationSpeed: 250,               // Animación más rápida
-                
-                // Opciones para móvil
-                uniqueImages: true,
-                showCounter: true,
-                enableKeyboard: true,
-                docClose: true,                    // Cerrar al hacer clic fuera de la imagen
-                swipeClose: true                   // Permitir deslizar para cerrar en móvil
-            });
-        });
-    </script>
+                </div>
+            </section>
+            <!-- SimpleLightbox JS -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.10.3/simple-lightbox.min.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    new SimpleLightbox('.gallery-container a', {
+                        // Opciones para mejorar la experiencia
+                        captions: true,
+                        captionPosition: 'bottom',
+                        captionsData: 'title',
+                        captionDelay: 200,
+                        closeText: '×',
+                        navText: ['←', '→'],
+                        alertError: 'No se pudo cargar la imagen',
+                        history: false,
 
-<!-- Sección de RSVP con formulario actualizado -->
-<section class="rsvp" id="rsvp">
-    <div class="container">
-        <h2 class="section-title">Confirmar Asistencia</h2>
-        <div class="rsvp-form">
-            <!-- Formulario actualizado con mejoras para FormSubmit -->
-            <form id="confirmation-form" action="https://formsubmit.co/bodajavirocio@gmail.com" method="POST">
-                <!-- Campos ocultos para configuración de FormSubmit -->
-                <input type="hidden" name="_subject" value="Nueva confirmación de asistencia al evento">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://javitgomez.github.io/BodaJavierRocio/gracias.html">
-                <!-- Campo honeypot para detectar spam sin requerir email -->
-                <input type="text" name="_honey" style="display:none">
-                <!-- Campo para prevenir reenvíos accidentales -->
-                <input type="hidden" name="_template" value="table">
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">Nombre y Apellidos</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Correo Electrónico (opcional)</label>
-                        <input type="email" id="email" name="email">
-                        <!-- Campo oculto para asegurar que FormSubmit funcione incluso sin email -->
-                        <input type="hidden" name="email_fallback" value="invitado@ejemplo.com">
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="attendance">¿Asistirás?</label>
-                        <select id="attendance" name="attendance" required>
-                            <option value="">Selecciona una opción</option>
-                            <option value="Sí, asistiré">Sí, asistiré</option>
-                            <option value="No lo he decidido aún">No lo he decidido aún</option>
-                            <option value="No podré asistir">No podré asistir</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="with_guest">¿Vienes acompañado?</label>
-                        <select id="with_guest" name="with_guest" required>
-                            <option value="">Selecciona una opción</option>
-                            <option value="Sí">Sí</option>
-                            <option value="No">No</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <!-- Nuevo campo para el nombre del acompañante (inicialmente oculto) -->
-                <div class="form-row" id="guest_name_container" style="display: none;">
-                    <div class="form-group full-width">
-                        <label for="guest_name">Nombre y Apellidos del Acompañante</label>
-                        <input type="text" id="guest_name" name="guest_name">
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="minors">¿Te acompañan peques?</label>
-                        <input type="number" id="minors" name="minors" min="0" value="0">
-                    </div>
-                    <div class="form-group">
-                        <label for="dietary">Restricciones alimentarias</label>
-                        <input type="text" id="dietary" name="dietary" placeholder="Ej. Vegetariano, alergias...">
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group full-width">
-                        <label for="message">Mensaje adicional</label>
-                        <textarea id="message" name="message" rows="4"></textarea>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <button type="submit" class="btn-submit" id="submit-button">Enviar Confirmación</button>
-                </div>
-                
-                <!-- Añadir mensajes de estado del envío -->
-                <div class="form-message success-message" id="success-message" style="display: none;">
-                    ¡Gracias por confirmar tu asistencia! Redirigiendo...
-                </div>
-                <div class="form-message error-message" id="error-message" style="display: none;">
-                    Ha habido un problema al enviar el formulario. Por favor, inténtalo de nuevo.
-                </div>
-            </form>
-        </div>
-    </div>
-</section>
+                        // Opciones de escala y respuesta
+                        scaleImageToRatio: true,           // Escalar imágenes manteniendo ratio
+                        maxZoom: 1.5,                      // Limitar el zoom máximo
+                        disableRightClick: false,          // Permitir guardar imágenes
+                        widthRatio: 0.9,                   // Usar 90% del ancho disponible
+                        heightRatio: 0.9,                  // Usar 90% de la altura disponible
+                        animationSpeed: 250,               // Animación más rápida
 
-<!-- Script actualizado para la lógica del formulario -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('confirmation-form');
-    const attendanceSelect = document.getElementById('attendance');
-    const withGuestSelect = document.getElementById('with_guest');
-    const minorsInput = document.getElementById('minors');
-    const successMessage = document.getElementById('success-message');
-    const errorMessage = document.getElementById('error-message');
-    const submitButton = document.getElementById('submit-button');
-    const guestNameContainer = document.getElementById('guest_name_container');
-    const guestNameInput = document.getElementById('guest_name');
-    
-    // Deshabilitar campos si no asistirá
-    attendanceSelect.addEventListener('change', function() {
-        if (this.value === 'No podré asistir') {
-            withGuestSelect.value = 'No';
-            withGuestSelect.disabled = true;
-            minorsInput.value = '0';
-            minorsInput.disabled = true;
-            guestNameContainer.style.display = 'none';
-            guestNameInput.required = false;
-        } else {
-            withGuestSelect.disabled = false;
-            minorsInput.disabled = false;
-            // Comprobar el estado actual del select de acompañante
-            toggleGuestNameField();
-        }
-    });
-    
-    // Mostrar/ocultar campo de nombre del acompañante
-    withGuestSelect.addEventListener('change', toggleGuestNameField);
-    
-    // Función para mostrar/ocultar campo de nombre del acompañante
-    function toggleGuestNameField() {
-        if (withGuestSelect.value === 'Sí' && !withGuestSelect.disabled) {
-            guestNameContainer.style.display = 'flex';
-            guestNameInput.required = true;
-        } else {
-            guestNameContainer.style.display = 'none';
-            guestNameInput.required = false;
-            guestNameInput.value = '';
-        }
-    }
-    
-    // Gestionar el envío del formulario
-    form.addEventListener('submit', function(e) {
-        // Si el campo de email está vacío, usar el email de respaldo
-        const emailField = document.getElementById('email');
-        if (!emailField.value.trim()) {
-            // Asegurar que el campo oculto email_fallback sea el que se use
-            document.querySelector('input[name="email_fallback"]').name = "email";
-        }
-        
-        // Deshabilitar el botón durante el envío para evitar múltiples envíos
-        submitButton.disabled = true;
-        submitButton.textContent = 'Enviando...';
-        
-        // Guardar una copia local de los datos enviados
-        const formData = {
-            name: document.getElementById('name').value,
-            email: emailField.value || 'No proporcionado',
-            attendance: attendanceSelect.value,
-            with_guest: withGuestSelect.value,
-            guest_name: withGuestSelect.value === 'Sí' ? guestNameInput.value : 'No aplica',
-            minors: minorsInput.value,
-            dietary: document.getElementById('dietary').value,
-            message: document.getElementById('message').value,
-            date: new Date().toISOString()
-        };
-        
-        // Guardar en localStorage
-        try {
-            let confirmations = JSON.parse(localStorage.getItem('eventConfirmations') || '[]');
-            confirmations.push(formData);
-            localStorage.setItem('eventConfirmations', JSON.stringify(confirmations));
-            console.log('Datos guardados localmente con éxito');
-        } catch (error) {
-            console.error('Error al guardar datos localmente:', error);
-        }
-        
-        // Mostrar mensaje de éxito
-        successMessage.style.display = 'block';
-        
-        // Fallback de redirección en caso de que FormSubmit no redirija
-        setTimeout(function() {
-            window.location.href = 'https://javitgomez.github.io/BodaJavierRocio/gracias.html';
-        }, 3000);
-    });
-    
-    // Manejar errores del formulario
-    window.addEventListener('error', function(e) {
-        if (e.target.tagName.toLowerCase() === 'form') {
-            errorMessage.style.display = 'block';
-            submitButton.disabled = false;
-            submitButton.textContent = 'Enviar Confirmación';
-        }
-    }, true);
-    
-    // Inicializar el estado del campo de nombre del acompañante
-    toggleGuestNameField();
-});
-</script>
+                        // Opciones para móvil
+                        uniqueImages: true,
+                        showCounter: true,
+                        enableKeyboard: true,
+                        docClose: true,                    // Cerrar al hacer clic fuera de la imagen
+                        swipeClose: true                   // Permitir deslizar para cerrar en móvil
+                    });
+                });
+            </script>
+
+            <!-- Sección de RSVP con formulario actualizado -->
+            <section class="rsvp" id="rsvp">
+                <div class="container">
+                    <h2 class="section-title">Confirmar Asistencia</h2>
+                    <div class="rsvp-form">
+                        <!-- Formulario actualizado con mejoras para FormSubmit -->
+                        <form id="confirmation-form" action="https://formsubmit.co/bodajavirocio@gmail.com"
+                            method="POST">
+                            <!-- Campos ocultos para configuración de FormSubmit -->
+                            <input type="hidden" name="_subject" value="Nueva confirmación de asistencia al evento">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_next"
+                                value="https://javitgomez.github.io/BodaJavierRocio/gracias.html">
+                            <!-- Campo honeypot para detectar spam sin requerir email -->
+                            <input type="text" name="_honey" style="display:none">
+                            <!-- Campo para prevenir reenvíos accidentales -->
+                            <input type="hidden" name="_template" value="table">
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Nombre y Apellidos</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Correo Electrónico (opcional)</label>
+                                    <input type="email" id="email" name="email">
+                                    <!-- Campo oculto para asegurar que FormSubmit funcione incluso sin email -->
+                                    <input type="hidden" name="email_fallback" value="invitado@ejemplo.com">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="attendance">¿Asistirás?</label>
+                                    <select id="attendance" name="attendance" required>
+                                        <option value="">Selecciona una opción</option>
+                                        <option value="Sí, asistiré">Sí, asistiré</option>
+                                        <option value="No lo he decidido aún">No lo he decidido aún</option>
+                                        <option value="No podré asistir">No podré asistir</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="with_guest">¿Vienes acompañado?</label>
+                                    <select id="with_guest" name="with_guest" required>
+                                        <option value="">Selecciona una opción</option>
+                                        <option value="Sí">Sí</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Nuevo campo para el nombre del acompañante (inicialmente oculto) -->
+                            <div class="form-row" id="guest_name_container" style="display: none;">
+                                <div class="form-group full-width">
+                                    <label for="guest_name">Nombre y Apellidos del Acompañante</label>
+                                    <input type="text" id="guest_name" name="guest_name">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="minors">¿Te acompañan peques?</label>
+                                    <input type="number" id="minors" name="minors" min="0" value="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="dietary">Restricciones alimentarias</label>
+                                    <input type="text" id="dietary" name="dietary"
+                                        placeholder="Ej. Vegetariano, alergias...">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group full-width">
+                                    <label for="message">Mensaje adicional</label>
+                                    <textarea id="message" name="message" rows="4"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <button type="submit" class="btn-submit" id="submit-button">Enviar Confirmación</button>
+                            </div>
+
+                            <!-- Añadir mensajes de estado del envío -->
+                            <div class="form-message success-message" id="success-message" style="display: none;">
+                                ¡Gracias por confirmar tu asistencia! Redirigiendo...
+                            </div>
+                            <div class="form-message error-message" id="error-message" style="display: none;">
+                                Ha habido un problema al enviar el formulario. Por favor, inténtalo de nuevo.
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Script actualizado para la lógica del formulario -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const form = document.getElementById('confirmation-form');
+                    const attendanceSelect = document.getElementById('attendance');
+                    const withGuestSelect = document.getElementById('with_guest');
+                    const minorsInput = document.getElementById('minors');
+                    const successMessage = document.getElementById('success-message');
+                    const errorMessage = document.getElementById('error-message');
+                    const submitButton = document.getElementById('submit-button');
+                    const guestNameContainer = document.getElementById('guest_name_container');
+                    const guestNameInput = document.getElementById('guest_name');
+
+                    // Deshabilitar campos si no asistirá
+                    attendanceSelect.addEventListener('change', function () {
+                        if (this.value === 'No podré asistir') {
+                            withGuestSelect.value = 'No';
+                            withGuestSelect.disabled = true;
+                            minorsInput.value = '0';
+                            minorsInput.disabled = true;
+                            guestNameContainer.style.display = 'none';
+                            guestNameInput.required = false;
+                        } else {
+                            withGuestSelect.disabled = false;
+                            minorsInput.disabled = false;
+                            // Comprobar el estado actual del select de acompañante
+                            toggleGuestNameField();
+                        }
+                    });
+
+                    // Mostrar/ocultar campo de nombre del acompañante
+                    withGuestSelect.addEventListener('change', toggleGuestNameField);
+
+                    // Función para mostrar/ocultar campo de nombre del acompañante
+                    function toggleGuestNameField() {
+                        if (withGuestSelect.value === 'Sí' && !withGuestSelect.disabled) {
+                            guestNameContainer.style.display = 'flex';
+                            guestNameInput.required = true;
+                        } else {
+                            guestNameContainer.style.display = 'none';
+                            guestNameInput.required = false;
+                            guestNameInput.value = '';
+                        }
+                    }
+
+                    // Gestionar el envío del formulario
+                    form.addEventListener('submit', function (e) {
+                        // Si el campo de email está vacío, usar el email de respaldo
+                        const emailField = document.getElementById('email');
+                        if (!emailField.value.trim()) {
+                            // Asegurar que el campo oculto email_fallback sea el que se use
+                            document.querySelector('input[name="email_fallback"]').name = "email";
+                        }
+
+                        // Deshabilitar el botón durante el envío para evitar múltiples envíos
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Enviando...';
+
+                        // Guardar una copia local de los datos enviados
+                        const formData = {
+                            name: document.getElementById('name').value,
+                            email: emailField.value || 'No proporcionado',
+                            attendance: attendanceSelect.value,
+                            with_guest: withGuestSelect.value,
+                            guest_name: withGuestSelect.value === 'Sí' ? guestNameInput.value : 'No aplica',
+                            minors: minorsInput.value,
+                            dietary: document.getElementById('dietary').value,
+                            message: document.getElementById('message').value,
+                            date: new Date().toISOString()
+                        };
+
+                        // Guardar en localStorage
+                        try {
+                            let confirmations = JSON.parse(localStorage.getItem('eventConfirmations') || '[]');
+                            confirmations.push(formData);
+                            localStorage.setItem('eventConfirmations', JSON.stringify(confirmations));
+                            console.log('Datos guardados localmente con éxito');
+                        } catch (error) {
+                            console.error('Error al guardar datos localmente:', error);
+                        }
+
+                        // Mostrar mensaje de éxito
+                        successMessage.style.display = 'block';
+
+                        // Fallback de redirección en caso de que FormSubmit no redirija
+                        setTimeout(function () {
+                            window.location.href = 'https://javitgomez.github.io/BodaJavierRocio/gracias.html';
+                        }, 3000);
+                    });
+
+                    // Manejar errores del formulario
+                    window.addEventListener('error', function (e) {
+                        if (e.target.tagName.toLowerCase() === 'form') {
+                            errorMessage.style.display = 'block';
+                            submitButton.disabled = false;
+                            submitButton.textContent = 'Enviar Confirmación';
+                        }
+                    }, true);
+
+                    // Inicializar el estado del campo de nombre del acompañante
+                    toggleGuestNameField();
+                });
+            </script>
 </body>
