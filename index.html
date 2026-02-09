@@ -128,17 +128,6 @@
             font-style: italic;
         }
 
-        /*  .header-date {
-            display: inline-block;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            padding: 1rem 2rem;
-            border-radius: 3px;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            margin-top: 1rem;
-            background-color: rgba(255, 255, 255, 0.1);
-        }*/
-
         .header-date {
             display: inline-block;
             padding: 1.2rem 2.6rem;
@@ -744,15 +733,73 @@
                     /* En móviles pequeños, mueve más a la derecha */
                 }
             }
+
+            /* Corrección DEFINITIVA para móviles grandes y tablets en horizontal */
+            @media only screen and (max-width: 1024px) and (orientation: landscape) {
+
+                header {
+                    height: auto !important;
+                    /* Fuerza altura automática */
+                    min-height: 100vh;
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    display: flex !important;
+                    /* Asegura flexbox */
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .names-monogram {
+                    position: relative !important;
+                    /* CLAVE: Quita absolute */
+                    top: auto !important;
+                    left: auto !important;
+                    transform: none !important;
+                    margin: 0 auto 15px auto !important;
+                    /* Margen inferior vital */
+                    width: 80px;
+                    height: 80px;
+                    font-size: 1.8rem;
+                }
+
+                .header-content {
+                    margin-top: 0 !important;
+                    padding: 1rem !important;
+                    width: 90%;
+                    /* Para que no se pegue a los bordes */
+                    max-width: 600px;
+                }
+
+                .header-content h1 {
+                    font-size: 2.5rem !important;
+                    /* Ajusta tamaño para que quepa */
+                    line-height: 1.1;
+                    margin-bottom: 0.5rem;
+                }
+
+                .header-content h2 {
+                    font-size: 1.5rem !important;
+                    margin-bottom: 1rem;
+                }
+
+                .header-date {
+                    margin-top: 0.5rem;
+                    padding: 0.6rem 1.5rem;
+                    font-size: 1.2rem;
+                }
+            }
+
+        }
     </style>
 </head>
 
 <body>
     <header>
         <div class="header-overlay"></div>
-        <div class="names-monogram">J&R</div>
+        <div class="names-monogram">R&J</div>
         <div class="header-content">
-            <h1>Javier & Rocío</h1>
+            <h1>Rocío & Javier</h1>
             <h2>¡Nos casamos!</h2>
             <div class="header-date">06 · junio · 2026</div>
         </div>
