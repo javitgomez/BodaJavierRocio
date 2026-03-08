@@ -1047,6 +1047,9 @@
                         <!-- Formulario actualizado con mejoras para FormSubmit -->
                         <form id="confirmation-form" action="https://formsubmit.co/bodajavirocio@gmail.com"
                             method="POST">
+                            <input type="hidden" name="_webhook"
+                                value="https://script.google.com/macros/s/AKfycbwQc96If2L49s79q1IElj2udaX0t3k_GgJcUSpzIJTJcnWuPXla2YBcvVbduDXc15Ae/exec">
+
                             <!-- Campos ocultos para configuración de FormSubmit -->
                             <input type="hidden" name="_subject" value="Nueva confirmación de asistencia al evento">
                             <input type="hidden" name="_captcha" value="false">
@@ -1067,8 +1070,7 @@
                                 <div class="form-group">
                                     <label for="email">Correo Electrónico (opcional)</label>
                                     <input type="email" id="email" name="email">
-                                    <!-- Campo oculto para asegurar que FormSubmit funcione incluso sin email -->
-                                    <input type="hidden" name="email_fallback" value="invitado@ejemplo.com">
+
                                 </div>
                             </div>
 
@@ -1111,6 +1113,17 @@
                                         placeholder="Ej. Vegetariano, alergias...">
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <div class="form-group full-width">
+                                    <label for="main_dish">Plato principal (opcional)</label>
+                                    <select id="main_dish" name="main_dish">
+                                        <option value="">Sin preferencia / Menú especial</option>
+                                        <option value="Cordero">🐑 Cordero</option>
+                                        <option value="Bacalao">🐟 Bacalao</option>
+                                    </select>
+                                </div>
+                            </div>
+
 
                             <div class="form-row">
                                 <div class="form-group full-width">
@@ -1180,8 +1193,42 @@
                         }
                     }
 
+                    attendanceSelect.addEventListener('change', function () {
+                        if (this.value === 'No podré asistir') {
+                            withGuestSelect.value = 'No';
+                            withGuestSelect.disabled = true;
+                            minorsInput.value = '0';
+                            minorsInput.disabled = true;
+                            guestNameContainer.style.display = 'none';
+                            guestNameInput.required = false;
+                            document.getElementById('main_dish').value = '';
+                            document.getElementById('main_dish').disabled = true;
+                        } else {
+                            withGuestSelect.disabled = false;
+                            minorsInput.disabled = false;
+                            document.getElementById('main_dish').disabled = false;
+                            toggleGuestNameField();
+                        }
+                    });
+
+
                     // Gestionar el envío del formulario
+
                     form.addEventListener('submit', function (e) {
+                        // Deshabilitar botón para evitar doble envío
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Enviando...';
+
+                        // Mostrar mensaje de éxito
+                        successMessage.style.display = 'block';
+
+                        // Fallback de redirección por si FormSubmit no redirige
+                        setTimeout(function () {
+                            window.location.href = 'https://javitgomez.github.io/BodaJavierRocio/gracias.html';
+                        }, 3000);
+                    });
+
+                    /*form.addEventListener('submit', function (e) {
                         // Si el campo de email está vacío, usar el email de respaldo
                         const emailField = document.getElementById('email');
                         if (!emailField.value.trim()) {
@@ -1225,6 +1272,7 @@
                         }, 3000);
                     });
 
+                    */
                     // Manejar errores del formulario
                     window.addEventListener('error', function (e) {
                         if (e.target.tagName.toLowerCase() === 'form') {

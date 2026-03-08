@@ -1,946 +1,377 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <title>Administración - Confirmaciones de Boda</title>
-    <style>
-      body {
-        font-family: 'Arial', sans-serif;
-        padding: 20px;
-        background-color: #f8f9fa;
-      }
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        background-color: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-      h1 {
-        color: #4a6baf;
-        margin-bottom: 20px;
-      }
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin — Boda Javier & Rocío</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #faf7f2;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #8b5e3c;
+      margin-bottom: 8px;
+      font-size: 1.8rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 30px;
+      font-size: 0.9rem;
+    }
+
+    .stats {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px 30px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      min-width: 130px;
+    }
+
+    .stat-card .number {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #8b5e3c;
+    }
+
+    .stat-card .label {
+      font-size: 0.8rem;
+      color: #999;
+      margin-top: 4px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .btn-primary {
+      background: #8b5e3c;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #7a5234;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: #8b5e3c;
+      border: 1px solid #8b5e3c;
+    }
+
+    .btn-secondary:hover {
+      background: #fdf0e0;
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid #ddd;
+      background: white;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .filter-btn.active {
+      background: #8b5e3c;
+      color: white;
+      border-color: #8b5e3c;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    thead {
+      background: #8b5e3c;
+      color: white;
+    }
+
+    th,
+    td {
+      padding: 12px 14px;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #fdf7f0;
+    }
+
+    tbody tr:hover {
+      background: #fde8cc;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .badge-si {
+      background: #d4edda;
+      color: #155724;
+    }
+
+    .badge-no {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    .badge-pend {
+      background: #fff3cd;
+      color: #856404;
+    }
+
+    #loading {
+      text-align: center;
+      padding: 40px;
+      color: #aaa;
+      font-size: 1rem;
+    }
+
+    #error-msg {
+      text-align: center;
+      padding: 20px;
+      color: #c0392b;
+      background: #fdecea;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    @media (max-width: 700px) {
       table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-        font-size: 14px;
+        font-size: 0.78rem;
       }
+
       th,
       td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid #e0e0e0;
+        padding: 8px 8px;
       }
-      th {
-        background-color: #f0f4f8;
-        font-weight: bold;
-      }
-      tr:hover {
-        background-color: #f5f5f5;
-      }
-      .stats {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        margin-bottom: 20px;
-      }
-      .stat-box {
-        flex: 1;
-        min-width: 200px;
-        background-color: #f0f4f8;
-        padding: 15px;
-        border-radius: 8px;
-        text-align: center;
-      }
-      .stat-value {
-        font-size: 32px;
-        font-weight: bold;
-        color: #4a6baf;
-        margin: 10px 0;
-      }
-      .stat-label {
-        color: #666;
-      }
-      .btn {
-        padding: 8px 15px;
-        background-color: #4a6baf;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin: 5px;
-      }
-      .btn:hover {
-        background-color: #3a569f;
-      }
-      .btn-danger {
-        background-color: #dc3545;
-      }
-      .btn-danger:hover {
-        background-color: #c82333;
-      }
-      .btn-edit {
-        background-color: #28a745;
-      }
-      .btn-edit:hover {
-        background-color: #218838;
-      }
-      .action-btns {
-        display: flex;
-        gap: 5px;
-      }
-      .modal {
+
+      .hide-mobile {
         display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
       }
-      .modal-content {
-        background-color: white;
-        margin: 10% auto;
-        padding: 20px;
-        border-radius: 8px;
-        max-width: 600px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      }
-      .modal-title {
-        margin-top: 0;
-        color: #4a6baf;
-      }
-      .close {
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      .close:hover {
-        color: #dc3545;
-      }
-      .form-group {
-        margin-bottom: 15px;
-      }
-      .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
-      .form-group input,
-      .form-group select,
-      .form-group textarea {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-      }
-      .filter-section {
-        margin-bottom: 20px;
-        padding: 15px;
-        background-color: #f8f9fa;
-        border-radius: 8px;
-      }
-      .filter-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-        margin-bottom: 10px;
-      }
-      .filter-group {
-        flex: 1;
-        min-width: 200px;
-      }
-      .filter-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-      }
-      .filter-group input,
-      .filter-group select {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-      }
-      .btn-reset {
-        background-color: #6c757d;
-      }
-      .btn-reset:hover {
-        background-color: #5a6268;
-      }
-      .table-responsive {
-        overflow-x: auto;
-      }
-      #search-results {
-        margin-top: 10px;
-        font-style: italic;
-        color: #666;
-      }
-      .badges-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-      }
-      .badge {
-        padding: 5px 10px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: bold;
-      }
-      .badge-attending {
-        background-color: #28a745;
-        color: white;
-      }
-      .badge-not-attending {
-        background-color: #dc3545;
-        color: white;
-      }
-      .badge-undecided {
-        background-color: #ffc107;
-        color: #212529;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Panel de Confirmaciones para la Boda</h1>
+    }
+  </style>
+</head>
 
-      <!-- Estadísticas -->
-      <div class="stats">
-        <div class="stat-box">
-          <div class="stat-label">Total de Confirmaciones</div>
-          <div
-            class="stat-value"
-            id="total-confirmations"
-          >
-            0
-          </div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">Asistirán</div>
-          <div
-            class="stat-value"
-            id="attending"
-          >
-            0
-          </div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">No Asistirán</div>
-          <div
-            class="stat-value"
-            id="not-attending"
-          >
-            0
-          </div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">Sin Decidir</div>
-          <div
-            class="stat-value"
-            id="undecided"
-          >
-            0
-          </div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">Total de Invitados</div>
-          <div
-            class="stat-value"
-            id="total-guests"
-          >
-            0
-          </div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">Total de Menores</div>
-          <div
-            class="stat-value"
-            id="total-minors"
-          >
-            0
-          </div>
-        </div>
-      </div>
+<body>
 
-      <!-- Filtros -->
-      <div class="filter-section">
-        <h3>Filtrar y Buscar</h3>
-        <div class="filter-row">
-          <div class="filter-group">
-            <label for="filter-name">Nombre</label>
-            <input
-              type="text"
-              id="filter-name"
-              placeholder="Buscar por nombre..."
-            />
-          </div>
-          <div class="filter-group">
-            <label for="filter-attendance">Asistencia</label>
-            <select id="filter-attendance">
-              <option value="">Todos</option>
-              <option value="Sí, asistiré">Asistirán</option>
-              <option value="No podré asistir">No asistirán</option>
-              <option value="No lo he decidido aún">Sin decidir</option>
-            </select>
-          </div>
-          <div class="filter-group">
-            <label for="filter-guest-name">Nombre de acompañante</label>
-            <input
-              type="text"
-              id="filter-guest-name"
-              placeholder="Buscar por nombre de acompañante..."
-            />
-          </div>
-        </div>
-        <div class="filter-row">
-          <div class="filter-group">
-            <label for="filter-dietary">Restricciones alimentarias</label>
-            <input
-              type="text"
-              id="filter-dietary"
-              placeholder="Filtrar por restricciones..."
-            />
-          </div>
-          <button
-            id="apply-filters"
-            class="btn"
-          >
-            Aplicar Filtros
-          </button>
-          <button
-            id="reset-filters"
-            class="btn btn-reset"
-          >
-            Restablecer
-          </button>
-        </div>
-        <div id="search-results"></div>
-      </div>
+  <h1>💍 Panel de Confirmaciones</h1>
+  <p class="subtitle">Boda Javier & Rocío — actualiza para ver los últimos datos</p>
 
-      <!-- Botones de acción principal -->
-      <button
-        id="export-csv"
-        class="btn"
-      >
-        Exportar a CSV
-      </button>
-      <button
-        id="clear-data"
-        class="btn btn-danger"
-      >
-        Borrar todos los datos
-      </button>
+  <div id="error-msg"></div>
 
-      <!-- Tabla de confirmaciones -->
-      <div class="table-responsive">
-        <table id="confirmations-table">
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Nombre</th>
-              <th>Email</th>
-              <th>Asistencia</th>
-              <th>Invitado</th>
-              <th>Nombre Acompañante</th>
-              <th>Menores</th>
-              <th>Restricciones</th>
-              <th>Mensaje</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="table-body">
-            <!-- Datos se cargarán aquí -->
-          </tbody>
-        </table>
-      </div>
+  <div class="stats">
+    <div class="stat-card">
+      <div class="number" id="stat-total">—</div>
+      <div class="label">Total respuestas</div>
     </div>
-
-    <!-- Modal para editar confirmación -->
-    <div
-      id="edit-modal"
-      class="modal"
-    >
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2 class="modal-title">Editar Confirmación</h2>
-        <form id="edit-form">
-          <input
-            type="hidden"
-            id="edit-index"
-          />
-          <div class="form-group">
-            <label for="edit-name">Nombre y Apellidos</label>
-            <input
-              type="text"
-              id="edit-name"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="edit-email">Correo Electrónico (opcional)</label>
-            <input
-              type="email"
-              id="edit-email"
-            />
-          </div>
-          <div class="form-group">
-            <label for="edit-attendance">¿Asistirá?</label>
-            <select
-              id="edit-attendance"
-              required
-            >
-              <option value="Sí, asistiré">Sí, asistiré</option>
-              <option value="No lo he decidido aún">
-                No lo he decidido aún
-              </option>
-              <option value="No podré asistir">No podré asistir</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="edit-with-guest">¿Llevará invitado?</label>
-            <select
-              id="edit-with-guest"
-              required
-            >
-              <option value="Sí">Sí</option>
-              <option value="No">No</option>
-            </select>
-          </div>
-          <div
-            class="form-group"
-            id="edit-guest-name-container"
-            style="display: none"
-          >
-            <label for="edit-guest-name"
-              >Nombre y Apellidos del Acompañante</label
-            >
-            <input
-              type="text"
-              id="edit-guest-name"
-            />
-          </div>
-          <div class="form-group">
-            <label for="edit-minors">Menores a su cargo</label>
-            <input
-              type="number"
-              id="edit-minors"
-              min="0"
-              value="0"
-            />
-          </div>
-          <div class="form-group">
-            <label for="edit-dietary">Restricciones alimentarias</label>
-            <input
-              type="text"
-              id="edit-dietary"
-              placeholder="Ej. Vegetariano, alergias..."
-            />
-          </div>
-          <div class="form-group">
-            <label for="edit-message">Mensaje adicional</label>
-            <textarea
-              id="edit-message"
-              rows="4"
-            ></textarea>
-          </div>
-          <button
-            type="submit"
-            class="btn btn-edit"
-          >
-            Guardar Cambios
-          </button>
-          <button
-            type="button"
-            class="btn btn-reset"
-            id="cancel-edit"
-          >
-            Cancelar
-          </button>
-        </form>
-      </div>
+    <div class="stat-card">
+      <div class="number" id="stat-asisten">—</div>
+      <div class="label">Confirman asistencia</div>
     </div>
-
-    <!-- Modal para confirmar eliminación -->
-    <div
-      id="delete-modal"
-      class="modal"
-    >
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2 class="modal-title">Confirmar Eliminación</h2>
-        <p>
-          ¿Estás seguro de que quieres eliminar esta confirmación? Esta acción
-          no se puede deshacer.
-        </p>
-        <input
-          type="hidden"
-          id="delete-index"
-        />
-        <button
-          id="confirm-delete"
-          class="btn btn-danger"
-        >
-          Eliminar
-        </button>
-        <button
-          id="cancel-delete"
-          class="btn btn-reset"
-        >
-          Cancelar
-        </button>
-      </div>
+    <div class="stat-card">
+      <div class="number" id="stat-no">—</div>
+      <div class="label">No asisten</div>
     </div>
+    <div class="stat-card">
+      <div class="number" id="stat-pendiente">—</div>
+      <div class="label">Pendientes</div>
+    </div>
+    <div class="stat-card">
+      <div class="number" id="stat-personas">—</div>
+      <div class="label">Personas totales</div>
+    </div>
+    <div class="stat-card">
+      <div class="number" id="stat-ninos">—</div>
+      <div class="label">Niños</div>
+    </div>
+  </div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        // Funciones de utilidad
-        function loadData() {
-          return JSON.parse(localStorage.getItem('eventConfirmations') || '[]');
-        }
+  <div class="controls">
+    <button class="btn btn-primary" onclick="cargarDatos()">🔄 Actualizar</button>
+    <button class="btn btn-secondary" onclick="exportarCSV()">📥 Exportar CSV</button>
+  </div>
 
-        function saveData(data) {
-          localStorage.setItem('eventConfirmations', JSON.stringify(data));
-        }
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filtrar('todos', this)">Todos</button>
+    <button class="filter-btn" onclick="filtrar('Sí, asistiré', this)">✅ Asisten</button>
+    <button class="filter-btn" onclick="filtrar('No podré asistir', this)">❌ No asisten</button>
+    <button class="filter-btn" onclick="filtrar('No lo he decidido aún', this)">⏳ Pendientes</button>
+  </div>
 
-        // Control de modales
-        const editModal = document.getElementById('edit-modal');
-        const deleteModal = document.getElementById('delete-modal');
-        const closeBtns = document.querySelectorAll('.close');
+  <div id="loading">Cargando confirmaciones...</div>
 
-        closeBtns.forEach((btn) => {
-          btn.addEventListener('click', function () {
-            editModal.style.display = 'none';
-            deleteModal.style.display = 'none';
-          });
-        });
+  <div id="tabla-container" style="display:none; overflow-x:auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Nombre</th>
+          <th>Asistencia</th>
+          <th class="hide-mobile">Acompañante</th>
+          <th class="hide-mobile">Nombre Acomp.</th>
+          <th>Niños</th>
+          <th class="hide-mobile">Restricciones</th>
+          <th class="hide-mobile">Mensaje</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-body"></tbody>
+    </table>
+  </div>
 
-        window.addEventListener('click', function (event) {
-          if (event.target === editModal) {
-            editModal.style.display = 'none';
-          }
-          if (event.target === deleteModal) {
-            deleteModal.style.display = 'none';
-          }
-        });
+  <script>
+    // ⚠️ CAMBIA ESTA URL POR LA DE TU APPS SCRIPT
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwQc96If2L49s79q1IElj2udaX0t3k_GgJcUSpzIJTJcnWuPXla2YBcvVbduDXc15Ae/exec";
 
-        document
-          .getElementById('cancel-edit')
-          .addEventListener('click', function () {
-            editModal.style.display = 'none';
-          });
+    let todosLosDatos = [];
+    let filtroActual = "todos";
 
-        document
-          .getElementById('cancel-delete')
-          .addEventListener('click', function () {
-            deleteModal.style.display = 'none';
-          });
+    async function cargarDatos() {
+      document.getElementById("loading").style.display = "block";
+      document.getElementById("tabla-container").style.display = "none";
+      document.getElementById("error-msg").style.display = "none";
 
-        // Función para obtener una etiqueta de asistencia
-        function getAttendanceBadge(status) {
-          if (status.includes('Sí')) {
-            return '<span class="badge badge-attending">Asistirá</span>';
-          } else if (status.includes('No podré')) {
-            return '<span class="badge badge-not-attending">No asistirá</span>';
-          } else {
-            return '<span class="badge badge-undecided">Sin decidir</span>';
-          }
-        }
+      try {
+        const res = await fetch(APPS_SCRIPT_URL);
+        if (!res.ok) throw new Error("Error HTTP: " + res.status);
+        const json = await res.json();
+        todosLosDatos = json.confirmaciones || [];
+        renderTabla(todosLosDatos);
+        actualizarStats(todosLosDatos);
+      } catch (err) {
+        document.getElementById("error-msg").textContent =
+          "⚠️ No se pudieron cargar los datos. Comprueba que el Apps Script está publicado correctamente. Error: " + err.message;
+        document.getElementById("error-msg").style.display = "block";
+      } finally {
+        document.getElementById("loading").style.display = "none";
+      }
+    }
 
-        // Mostrar datos en la tabla con filtrado
-        function displayData(filters = {}) {
-          const confirmations = loadData();
-          const tableBody = document.getElementById('table-body');
-          tableBody.innerHTML = '';
+    function renderTabla(datos) {
+      const tbody = document.getElementById("tabla-body");
+      if (datos.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#aaa;padding:30px">Sin confirmaciones aún</td></tr>';
+      } else {
+        tbody.innerHTML = datos.map(function (r) {
+          const asistencia = r["Asistencia"] || "";
+          let badgeClass = "badge-pend";
+          if (asistencia.includes("Sí") || asistencia.includes("asistiré")) badgeClass = "badge-si";
+          if (asistencia.includes("No podré")) badgeClass = "badge-no";
 
-          // Contadores para estadísticas
-          let attending = 0;
-          let notAttending = 0;
-          let undecided = 0;
-          let totalGuests = 0;
-          let totalMinors = 0;
-          let filteredCount = 0;
+          return `<tr>
+          <td>${r["Fecha"] || ""}</td>
+          <td><strong>${r["Nombre"] || ""}</strong></td>
+          <td><span class="badge ${badgeClass}">${asistencia}</span></td>
+          <td class="hide-mobile">${r["Acompañante"] || ""}</td>
+          <td class="hide-mobile">${r["Nombre Acompañante"] || ""}</td>
+          <td>${r["Niños"] || "0"}</td>
+          <td class="hide-mobile">${r["Restricciones"] || "—"}</td>
+          <td class="hide-mobile">${r["Mensaje"] || "—"}</td>
+        </tr>`;
+        }).join("");
+      }
+      document.getElementById("tabla-container").style.display = "block";
+    }
 
-          // Aplicar filtros
-          const filteredData = confirmations.filter((item) => {
-            // Filtro por nombre
-            if (
-              filters.name &&
-              !item.name.toLowerCase().includes(filters.name.toLowerCase())
-            ) {
-              return false;
-            }
+    function actualizarStats(datos) {
+      const total = datos.length;
+      const asisten = datos.filter(r => (r["Asistencia"] || "").includes("asistiré")).length;
+      const no = datos.filter(r => (r["Asistencia"] || "").includes("No podré")).length;
+      const pend = datos.filter(r => (r["Asistencia"] || "").includes("decidido")).length;
+      const ninos = datos.reduce((s, r) => s + (parseInt(r["Niños"]) || 0), 0);
 
-            // Filtro por asistencia
-            if (filters.attendance && item.attendance !== filters.attendance) {
-              return false;
-            }
+      // Personas = asisten + sus acompañantes (los que dijeron Sí a acompañante)
+      const acompanantes = datos.filter(r =>
+        (r["Asistencia"] || "").includes("asistiré") && r["Acompañante"] === "Sí"
+      ).length;
+      const personas = asisten + acompanantes;
 
-            // Filtro por nombre de acompañante
-            if (
-              filters.guestName &&
-              (!item.guest_name ||
-                !item.guest_name
-                  .toLowerCase()
-                  .includes(filters.guestName.toLowerCase()))
-            ) {
-              return false;
-            }
+      document.getElementById("stat-total").textContent = total;
+      document.getElementById("stat-asisten").textContent = asisten;
+      document.getElementById("stat-no").textContent = no;
+      document.getElementById("stat-pendiente").textContent = pend;
+      document.getElementById("stat-personas").textContent = personas;
+      document.getElementById("stat-ninos").textContent = ninos;
+    }
 
-            // Filtro por restricciones alimentarias
-            if (
-              filters.dietary &&
-              (!item.dietary ||
-                !item.dietary
-                  .toLowerCase()
-                  .includes(filters.dietary.toLowerCase()))
-            ) {
-              return false;
-            }
+    function filtrar(valor, btn) {
+      filtroActual = valor;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      if (valor === "todos") {
+        renderTabla(todosLosDatos);
+      } else {
+        renderTabla(todosLosDatos.filter(r => (r["Asistencia"] || "") === valor));
+      }
+    }
 
-            return true;
-          });
+    function exportarCSV() {
+      if (todosLosDatos.length === 0) return alert("No hay datos para exportar");
+      const headers = ["Fecha", "Nombre", "Email", "Asistencia", "Acompañante", "Nombre Acompañante", "Niños", "Restricciones", "Mensaje"];
+      const rows = todosLosDatos.map(r => headers.map(h => `"${(r[h] || "").toString().replace(/"/g, '""')}"`).join(","));
+      const csv = [headers.join(","), ...rows].join("\n");
+      const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a"); a.href = url;
+      a.download = "confirmaciones_boda.csv"; a.click();
+    }
 
-          // Mostrar los datos filtrados
-          filteredData.forEach((item, index) => {
-            const row = document.createElement('tr');
+    // Cargar al abrir la página
+    cargarDatos();
+  </script>
+</body>
 
-            // Formatear fecha
-            const date = new Date(item.date);
-            const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-
-            // Actualizar estadísticas
-            if (item.attendance.includes('Sí')) {
-              attending++;
-              // Contar invitados adicionales si asistirá
-              const withGuest = item.with_guest === 'Sí' ? 1 : 0;
-              totalGuests += withGuest + 1; // +1 por la persona principal
-              totalMinors += parseInt(item.minors) || 0;
-            } else if (item.attendance.includes('No podré')) {
-              notAttending++;
-            } else {
-              undecided++;
-            }
-
-            filteredCount++;
-
-            // Crear celdas
-            row.innerHTML = `
-              <td>${formattedDate}</td>
-              <td>${item.name || ''}</td>
-              <td>${item.email || ''}</td>
-              <td>${getAttendanceBadge(item.attendance || '')}</td>
-              <td>${item.with_guest || 'No'}</td>
-              <td>${
-                item.with_guest === 'Sí' ? item.guest_name || '-' : '-'
-              }</td>
-              <td>${item.minors || '0'}</td>
-              <td>${item.dietary || '-'}</td>
-              <td>${item.message || '-'}</td>
-              <td class="action-btns">
-                <button class="btn btn-edit btn-sm edit-btn" data-index="${confirmations.indexOf(
-                  item
-                )}">Editar</button>
-                <button class="btn btn-danger btn-sm delete-btn" data-index="${confirmations.indexOf(
-                  item
-                )}">Eliminar</button>
-              </td>
-            `;
-
-            tableBody.appendChild(row);
-          });
-
-          // Actualizar estadísticas globales (usando todos los datos, no solo los filtrados)
-          document.getElementById('total-confirmations').textContent =
-            confirmations.length;
-          document.getElementById('attending').textContent = attending;
-          document.getElementById('not-attending').textContent = notAttending;
-          document.getElementById('undecided').textContent = undecided;
-          document.getElementById('total-guests').textContent = totalGuests;
-          document.getElementById('total-minors').textContent = totalMinors;
-
-          // Mostrar resultados de búsqueda
-          if (Object.keys(filters).some((key) => filters[key])) {
-            document.getElementById(
-              'search-results'
-            ).textContent = `Mostrando ${filteredCount} de ${confirmations.length} confirmaciones`;
-          } else {
-            document.getElementById('search-results').textContent = '';
-          }
-
-          // Añadir event listeners para los botones de editar y eliminar
-          addActionButtonListeners();
-        }
-
-        // Función para añadir event listeners a los botones de acción
-        function addActionButtonListeners() {
-          // Botones de editar
-          document.querySelectorAll('.edit-btn').forEach((btn) => {
-            btn.addEventListener('click', function () {
-              const index = this.getAttribute('data-index');
-              openEditModal(index);
-            });
-          });
-
-          // Botones de eliminar
-          document.querySelectorAll('.delete-btn').forEach((btn) => {
-            btn.addEventListener('click', function () {
-              const index = this.getAttribute('data-index');
-              openDeleteModal(index);
-            });
-          });
-        }
-
-        // Función para mostrar/ocultar el campo de nombre de acompañante en el formulario de edición
-        function toggleGuestNameField() {
-          const withGuestSelect = document.getElementById('edit-with-guest');
-          const guestNameContainer = document.getElementById(
-            'edit-guest-name-container'
-          );
-          const guestNameInput = document.getElementById('edit-guest-name');
-
-          if (withGuestSelect.value === 'Sí' && !withGuestSelect.disabled) {
-            guestNameContainer.style.display = 'block';
-            guestNameInput.required = true;
-          } else {
-            guestNameContainer.style.display = 'none';
-            guestNameInput.required = false;
-            guestNameInput.value = '';
-          }
-        }
-
-        // Abrir modal de edición
-        function openEditModal(index) {
-          const confirmations = loadData();
-          const item = confirmations[index];
-
-          // Llenar el formulario con los datos existentes
-          document.getElementById('edit-index').value = index;
-          document.getElementById('edit-name').value = item.name || '';
-          document.getElementById('edit-email').value = item.email || '';
-          document.getElementById('edit-attendance').value =
-            item.attendance || '';
-          document.getElementById('edit-with-guest').value =
-            item.with_guest || 'No';
-          document.getElementById('edit-guest-name').value =
-            item.guest_name || '';
-          document.getElementById('edit-minors').value = item.minors || '0';
-          document.getElementById('edit-dietary').value = item.dietary || '';
-          document.getElementById('edit-message').value = item.message || '';
-
-          // Mostrar el modal
-          editModal.style.display = 'block';
-
-          // Manejar el estado del formulario basado en la asistencia
-          const attendanceSelect = document.getElementById('edit-attendance');
-          const withGuestSelect = document.getElementById('edit-with-guest');
-          const minorsInput = document.getElementById('edit-minors');
-
-          // Mostrar/ocultar el campo de nombre de acompañante
-          toggleGuestNameField();
-
-          if (item.attendance === 'No podré asistir') {
-            withGuestSelect.disabled = true;
-            minorsInput.disabled = true;
-            document.getElementById('edit-guest-name-container').style.display =
-              'none';
-          } else {
-            withGuestSelect.disabled = false;
-            minorsInput.disabled = false;
-            // Mostrar/ocultar según selección
-            toggleGuestNameField();
-          }
-
-          // Event listener para cambios en asistencia
-          attendanceSelect.addEventListener('change', function () {
-            if (this.value === 'No podré asistir') {
-              withGuestSelect.value = 'No';
-              withGuestSelect.disabled = true;
-              minorsInput.value = '0';
-              minorsInput.disabled = true;
-              document.getElementById(
-                'edit-guest-name-container'
-              ).style.display = 'none';
-            } else {
-              withGuestSelect.disabled = false;
-              minorsInput.disabled = false;
-              toggleGuestNameField();
-            }
-          });
-
-          // Event listener para cambios en acompañante
-          withGuestSelect.addEventListener('change', toggleGuestNameField);
-        }
-
-        // Guardar cambios de edición
-        document
-          .getElementById('edit-form')
-          .addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const index = document.getElementById('edit-index').value;
-            const confirmations = loadData();
-            const withGuest = document.getElementById('edit-with-guest').value;
-            const emailValue = document.getElementById('edit-email').value;
-
-            // Actualizar los datos
-            confirmations[index] = {
-              ...confirmations[index],
-              name: document.getElementById('edit-name').value,
-              email: emailValue || 'No proporcionado', // Usar valor por defecto si está vacío
-              attendance: document.getElementById('edit-attendance').value,
-              with_guest: withGuest,
-              guest_name:
-                withGuest === 'Sí'
-                  ? document.getElementById('edit-guest-name').value
-                  : '',
-              minors: document.getElementById('edit-minors').value,
-              dietary: document.getElementById('edit-dietary').value,
-              message: document.getElementById('edit-message').value,
-            };
-
-            // Guardar y actualizar la vista
-            saveData(confirmations);
-            displayData();
-            editModal.style.display = 'none';
-
-            // Mostrar mensaje de éxito
-            alert('Confirmación actualizada con éxito');
-          });
-
-        // Abrir modal de eliminación
-        function openDeleteModal(index) {
-          document.getElementById('delete-index').value = index;
-          deleteModal.style.display = 'block';
-        }
-
-        // Confirmar eliminación
-        document
-          .getElementById('confirm-delete')
-          .addEventListener('click', function () {
-            const index = document.getElementById('delete-index').value;
-            const confirmations = loadData();
-
-            // Eliminar el elemento
-            confirmations.splice(index, 1);
-
-            // Guardar y actualizar la vista
-            saveData(confirmations);
-            displayData();
-            deleteModal.style.display = 'none';
-
-            // Mostrar mensaje de éxito
-            alert('Confirmación eliminada con éxito');
-          });
-
-        // Exportar a CSV
-        document
-          .getElementById('export-csv')
-          .addEventListener('click', function () {
-            const confirmations = loadData();
-            if (confirmations.length === 0) {
-              alert('No hay datos para exportar');
-              return;
-            }
-
-            // Cabeceras CSV
-            let csvContent =
-              'Fecha,Nombre,Email,Asistencia,Invitado Adicional,Nombre Acompañante,Menores,Restricciones Alimentarias,Mensaje\n';
-
-            // Añadir cada fila
-            confirmations.forEach((item) => {
-              const date = new Date(item.date);
-              const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-
-              // Escapar comillas en los campos
-              const row = [
-                formattedDate,
-                `"${(item.name || '').replace(/"/g, '""')}"`,
-                `"${(item.email || 'No proporcionado').replace(/"/g, '""')}"`,
-                `"${(item.attendance || '').replace(/"/g, '""')}"`,
-                `"${(item.with_guest || 'No').replace(/"/g, '""')}"`,
-                `"${
-                  item.with_guest === 'Sí'
-                    ? (item.guest_name || '').replace(/"/g, '""')
-                    : ''
-                }"`,
-                item.minors || '0',
-                `"${(item.dietary || '').replace(/"/g, '""')}"`,
-                `"${(item.message || '').replace(/"/g, '""')}"`,
-              ].join(',');
-
-              csvContent += row + '\n';
-            });
-
-            // Crear enlace de descarga
-            const blob = new Blob([csvContent], {
-              type: 'text/csv;charset=utf-8;',
-            });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-
-            link.setAttribute('href', url);
-            link.setAttribute('download', 'confirmaciones_boda.csv');
-            link.style.display = 'none';
-
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-          });
-
-        // Borrar todos los datos
-        document
-          .getElementById('clear-data')
-          .addEventListener('click', function () {
-            if (
-              confirm(
-                '¿Estás seguro de que quieres borrar TODOS los datos? Esta acción no se puede deshacer.'
-              )
-            ) {
-              localStorage.removeItem('eventConfirmations');
-              displayData();
-              alert('Todos los datos han sido eliminados');
-            }
-          });
-
-        // Filtros
-        document
-          .getElementById('apply-filters')
-          .addEventListener('click', function () {
-            const filters = {
-              name: document.getElementById('filter-name').value,
-              attendance: document.getElementById('filter-attendance').value,
-              guestName: document.getElementById('filter-guest-name').value,
-              dietary: document.getElementById('filter-dietary').value,
-            };
-
-            displayData(filters);
-          });
-
-        document
-          .getElementById('reset-filters')
-          .addEventListener('click', function () {
-            // Limpiar todos los campos de filtro
-            document.getElementById('filter-name').value = '';
-            document.getElementById('filter-attendance').value = '';
-            document.getElementById('filter-guest-name').value = '';
-            document.getElementById('filter-dietary').value = '';
-
-            // Restablecer la vista
-            displayData();
-          });
-
-        // Cargar datos al inicio
-        displayData();
-      });
-    </script>
-  </body>
 </html>
