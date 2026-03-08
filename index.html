@@ -1260,18 +1260,18 @@
                     // Gestionar el envío del formulario
 
                     form.addEventListener('submit', function (e) {
+                        e.preventDefault(); // ← Evita que el form navegue solo
+
                         submitButton.disabled = true;
                         submitButton.textContent = 'Enviando...';
-                        successMessage.style.display = 'block';
 
-                        // Enviar copia al Apps Script / Google Sheets
                         const formData = {
                             name: document.getElementById('name').value,
                             email: document.getElementById('email').value,
                             attendance: document.getElementById('attendance').value,
                             with_guest: document.getElementById('with_guest').value,
                             guest_name: document.getElementById('guest_name').value,
-                            guest_dish: document.getElementById('guest_dish').value,
+                            guest_dish: document.getElementById('guest_dish') ? document.getElementById('guest_dish').value : '',
                             minors: document.getElementById('minors').value,
                             minors_menu: document.getElementById('minors_menu') ? document.getElementById('minors_menu').value : '',
                             main_dish: document.getElementById('main_dish').value,
@@ -1279,18 +1279,31 @@
                             message: document.getElementById('message').value
                         };
 
-                        fetch("https://script.google.com/macros/s/AKfycbzfG0cs2OSqXZy6wTSr2uxWYps2sXNOC_ReKKJZ85qe1KzM08tody18iKSgcjzrV0u8/exec", {
+                        // Enviar a Formspree
+                        const formspreeData = new FormData(form);
+                        const sendFormspree = fetch("https://formspree.io/f/mkoqgbaq", {
                             method: "POST",
-                            body: JSON.stringify(formData)
-                        }).catch(function () {
-                            // Si falla el script, el formulario Formspree igualmente habrá enviado
-                            console.log("Apps Script no disponible, datos guardados solo en Formspree");
+                            body: formspreeData,
+                            headers: { 'Accept': 'application/json' }
                         });
 
-                        setTimeout(function () {
-                            window.location.href = 'https://javitgomez.github.io/BodaJavierRocio/gracias.html';
-                        }, 3000);
+                        // Enviar a Apps Script / Google Sheets
+                        const sendSheets = fetch("https://script.google.com/macros/s/AKfycbzfG0cs2OSqXZy6wTSr2uxWYps2sXNOC_ReKKJZ85qe1KzM08tody18iKSgcjzrV0u8/exec", {
+                            method: "POST",
+                            mode: "no-cors",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(formData)
+                        });
+
+                        // Esperar ambos y redirigir
+                        Promise.allSettled([sendFormspree, sendSheets]).then(function () {
+                            successMessage.style.display = 'block';
+                            setTimeout(function () {
+                                window.location.href = 'https://javitgomez.github.io/BodaJavierRocio/gracias.html';
+                            }, 2000);
+                        });
                     });
+
 
 
                     /* form.addEventListener('submit', function (e) {
