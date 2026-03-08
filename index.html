@@ -1179,32 +1179,10 @@
                     const withGuestSelect = document.getElementById('with_guest');
                     const minorsInput = document.getElementById('minors');
                     const successMessage = document.getElementById('success-message');
-                    const errorMessage = document.getElementById('error-message');
                     const submitButton = document.getElementById('submit-button');
                     const guestNameContainer = document.getElementById('guest_name_container');
                     const guestNameInput = document.getElementById('guest_name');
 
-                    // Deshabilitar campos si no asistirá
-                    attendanceSelect.addEventListener('change', function () {
-                        if (this.value === 'No podré asistir') {
-                            withGuestSelect.value = 'No';
-                            withGuestSelect.disabled = true;
-                            minorsInput.value = '0';
-                            minorsInput.disabled = true;
-                            guestNameContainer.style.display = 'none';
-                            guestNameInput.required = false;
-                        } else {
-                            withGuestSelect.disabled = false;
-                            minorsInput.disabled = false;
-                            // Comprobar el estado actual del select de acompañante
-                            toggleGuestNameField();
-                        }
-                    });
-
-                    // Mostrar/ocultar campo de nombre del acompañante
-                    withGuestSelect.addEventListener('change', toggleGuestNameField);
-
-                    // Función para mostrar/ocultar campo de nombre del acompañante
                     function toggleGuestNameField() {
                         if (withGuestSelect.value === 'Sí' && !withGuestSelect.disabled) {
                             guestNameContainer.style.display = 'flex';
@@ -1229,7 +1207,6 @@
                             guestNameInput.required = false;
                             document.getElementById('main_dish').value = '';
                             document.getElementById('main_dish').disabled = true;
-                            // ← NUEVO
                             document.getElementById('guest_dish_container').style.display = 'none';
                             document.getElementById('guest_dish').value = '';
                             document.getElementById('minors_menu_container').style.display = 'none';
@@ -1239,13 +1216,14 @@
                             minorsInput.disabled = false;
                             document.getElementById('main_dish').disabled = false;
                             toggleGuestNameField();
-                            // ← NUEVO: restaurar menú infantil si ya había menores
                             if (parseInt(minorsInput.value) > 0) {
                                 document.getElementById('minors_menu_container').style.display = 'flex';
                             }
                         }
                     });
-                    // Mostrar menú infantil si hay menores
+
+                    withGuestSelect.addEventListener('change', toggleGuestNameField);
+
                     minorsInput.addEventListener('input', function () {
                         const container = document.getElementById('minors_menu_container');
                         if (parseInt(this.value) > 0) {
@@ -1256,11 +1234,8 @@
                         }
                     });
 
-
-                    // Gestionar el envío del formulario
-
                     form.addEventListener('submit', function (e) {
-                        e.preventDefault(); // ← Evita que el form navegue solo
+                        e.preventDefault();
 
                         submitButton.disabled = true;
                         submitButton.textContent = 'Enviando...';
@@ -1268,32 +1243,29 @@
                         const formData = {
                             name: document.getElementById('name').value,
                             email: document.getElementById('email').value,
-                            attendance: document.getElementById('attendance').value,
-                            with_guest: document.getElementById('with_guest').value,
-                            guest_name: document.getElementById('guest_name').value,
+                            attendance: attendanceSelect.value,
+                            with_guest: withGuestSelect.value,
+                            guest_name: guestNameInput.value,
                             guest_dish: document.getElementById('guest_dish') ? document.getElementById('guest_dish').value : '',
-                            minors: document.getElementById('minors').value,
+                            minors: minorsInput.value,
                             minors_menu: document.getElementById('minors_menu') ? document.getElementById('minors_menu').value : '',
                             main_dish: document.getElementById('main_dish').value,
                             dietary: document.getElementById('dietary').value,
                             message: document.getElementById('message').value
                         };
 
-                        // Enviar a Formspree
                         const formspreeData = new FormData(form);
-                        const sendFormspree = fetch("https://formspree.io/f/mkoqgbaq", {
-                            method: "POST",
+                        const sendFormspree = fetch('https://formspree.io/f/mkoqgbaq', {
+                            method: 'POST',
                             body: formspreeData,
                             headers: { 'Accept': 'application/json' }
                         });
 
-                        // Enviar a Apps Script / Google Sheets
                         const params = new URLSearchParams(formData);
                         const sendSheets = fetch(
-                            "https://script.google.com/macros/s/AKfycbzfG0cs2OSqXZy6wTSr2uxWYps2sXNOC_ReKKJZ85qe1KzM08tody18iKSgcjzrV0u8/exec?" + params.toString()
+                            'https://script.google.com/macros/s/AKfycbzfG0cs2OSqXZy6wTSr2uxWYps2sXNOC_ReKKJZ85qe1KzM08tody18iKSgcjzrV0u8/exec?' + params.toString()
                         );
 
-                        // Esperar ambos y redirigir
                         Promise.allSettled([sendFormspree, sendSheets]).then(function () {
                             successMessage.style.display = 'block';
                             setTimeout(function () {
@@ -1302,74 +1274,8 @@
                         });
                     });
 
-
-
-                    /* form.addEventListener('submit', function (e) {
-                         submitButton.disabled = true;
-                         submitButton.textContent = 'Enviando...';
-                         successMessage.style.display = 'block';
-                         setTimeout(function () {
-                             window.location.href = 'https://javitgomez.github.io/BodaJavierRocio/gracias.html';
-                         }, 3000);
-                     });*/
-
-
-                    /*form.addEventListener('submit', function (e) {
-                        // Si el campo de email está vacío, usar el email de respaldo
-                        const emailField = document.getElementById('email');
-                        if (!emailField.value.trim()) {
-                            // Asegurar que el campo oculto email_fallback sea el que se use
-                            document.querySelector('input[name="email_fallback"]').name = "email";
-                        }
-
-                        // Deshabilitar el botón durante el envío para evitar múltiples envíos
-                        submitButton.disabled = true;
-                        submitButton.textContent = 'Enviando...';
-
-                        // Guardar una copia local de los datos enviados
-                        const formData = {
-                            name: document.getElementById('name').value,
-                            email: emailField.value || 'No proporcionado',
-                            attendance: attendanceSelect.value,
-                            with_guest: withGuestSelect.value,
-                            guest_name: withGuestSelect.value === 'Sí' ? guestNameInput.value : 'No aplica',
-                            minors: minorsInput.value,
-                            dietary: document.getElementById('dietary').value,
-                            message: document.getElementById('message').value,
-                            date: new Date().toISOString()
-                        };
-
-                        // Guardar en localStorage
-                        try {
-                            let confirmations = JSON.parse(localStorage.getItem('eventConfirmations') || '[]');
-                            confirmations.push(formData);
-                            localStorage.setItem('eventConfirmations', JSON.stringify(confirmations));
-                            console.log('Datos guardados localmente con éxito');
-                        } catch (error) {
-                            console.error('Error al guardar datos localmente:', error);
-                        }
-
-                        // Mostrar mensaje de éxito
-                        successMessage.style.display = 'block';
-
-                        // Fallback de redirección en caso de que FormSubmit no redirija
-                        setTimeout(function () {
-                            window.location.href = 'https://javitgomez.github.io/BodaJavierRocio/gracias.html';
-                        }, 3000);
-                    });
-
-                    */
-                    // Manejar errores del formulario
-                    window.addEventListener('error', function (e) {
-                        if (e.target.tagName.toLowerCase() === 'form') {
-                            errorMessage.style.display = 'block';
-                            submitButton.disabled = false;
-                            submitButton.textContent = 'Enviar Confirmación';
-                        }
-                    }, true);
-
-                    // Inicializar el estado del campo de nombre del acompañante
                     toggleGuestNameField();
                 });
             </script>
+
 </body>
