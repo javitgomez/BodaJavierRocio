@@ -1288,12 +1288,10 @@
                         });
 
                         // Enviar a Apps Script / Google Sheets
-                        const sendSheets = fetch("https://script.google.com/macros/s/AKfycbzfG0cs2OSqXZy6wTSr2uxWYps2sXNOC_ReKKJZ85qe1KzM08tody18iKSgcjzrV0u8/exec", {
-                            method: "POST",
-                            mode: "no-cors",
-                            headers: { "Content-Type": "text/plain" },
-                            body: JSON.stringify(formData)
-                        });
+                        const params = new URLSearchParams(formData);
+                        const sendSheets = fetch(
+                            "https://script.google.com/macros/s/AKfycbzfG0cs2OSqXZy6wTSr2uxWYps2sXNOC_ReKKJZ85qe1KzM08tody18iKSgcjzrV0u8/exec?" + params.toString()
+                        );
 
                         // Esperar ambos y redirigir
                         Promise.allSettled([sendFormspree, sendSheets]).then(function () {
