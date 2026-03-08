@@ -1044,18 +1044,13 @@
                     <h2 class="section-title">Confirmar Asistencia</h2>
                     <div class="rsvp-form">
                         <!-- Formulario actualizado con mejoras para FormSubmit -->
-                        <form id="confirmation-form" action="https://formsubmit.co/bodajavirocio@gmail.com"
-                            method="POST">
-                            <input type="hidden" name="_webhook"
-                                value="https://script.google.com/macros/s/AKfycbwQc96If2L49s79q1IElj2udaX0t3k_GgJcUSpzIJTJcnWuPXla2YBcvVbduDXc15Ae/exec">
+                        <form action="https://formspree.io/f/mkoqgbaq" method="POST">
 
-                            <!-- Campos ocultos para configuración de FormSubmit -->
-                            <input type="hidden" name="_subject" value="Nueva confirmación de asistencia al evento">
-                            <input type="hidden" name="_captcha" value="false">
-                            <input type="hidden" name="_next"
-                                value="https://javitgomez.github.io/BodaJavierRocio/gracias.html">
-                            <!-- Campo honeypot para detectar spam sin requerir email -->
-                            <input type="text" name="_honey" style="display:none">
+
+
+                            <!-- SIN _webhook hasta que el Apps Script esté listo -->
+                            <!-- SIN _cc para evitar conflictos -->
+
                             <!-- Campo para prevenir reenvíos accidentales -->
                             <input type="hidden" name="_template" value="table">
 
@@ -1212,18 +1207,14 @@
                     // Gestionar el envío del formulario
 
                     form.addEventListener('submit', function (e) {
-                        // Deshabilitar botón para evitar doble envío
                         submitButton.disabled = true;
                         submitButton.textContent = 'Enviando...';
-
-                        // Mostrar mensaje de éxito
                         successMessage.style.display = 'block';
-
-                        // Fallback de redirección por si FormSubmit no redirige
                         setTimeout(function () {
                             window.location.href = 'https://javitgomez.github.io/BodaJavierRocio/gracias.html';
                         }, 3000);
                     });
+
 
                     /*form.addEventListener('submit', function (e) {
                         // Si el campo de email está vacío, usar el email de respaldo
